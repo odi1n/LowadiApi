@@ -5,6 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:LowadiBot.Views.Pages"
       xmlns:vm="clr-namespace:LowadiBot.ViewModels"
+      xmlns:lang="clr-namespace:LowadiBot.Langs"
+
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="600"
       Title="LoginPage">
@@ -174,13 +176,13 @@
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column="0"
-                Content="Войти"/>
+                Content="{x:Static lang:Lang.F_Enter}"/>
 
             <Button Grid.Column="1"
-                Content="Добавить"/>
+                Content="{x:Static lang:Lang.F_Addition}"/>
 
             <Button Grid.Column="2"
-                Content="Удалить"/>
+                Content="{x:Static lang:Lang.F_Remove}"/>
         </Grid>
     </Grid>
 </Page>

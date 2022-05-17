@@ -7,6 +7,7 @@
         xmlns:cmd="clr-namespace:LowadiBot.Infrastructure.Commands.Windows"
         xmlns:vm="clr-namespace:LowadiBot.ViewModels"
         xmlns:local="clr-namespace:LowadiBot"
+        xmlns:lang="clr-namespace:LowadiBot.Langs"
 
         xmlns:fa5="http://schemas.fontawesome.com/icons/"
 
@@ -18,8 +19,9 @@
 
         Height="700"
         Width="600"
-        MinWidth="100"
-        MinHeight="150" Icon="favicon.png">
+        MinHeight="350" 
+        MinWidth="300"
+        Icon="favicon.png">
 
 
     <Window.DataContext>
@@ -54,6 +56,7 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="24"/>
                                         <ColumnDefinition Width="24"/>
+                                        <ColumnDefinition Width="24"/>
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
@@ -67,15 +70,22 @@
                                             Style="{StaticResource SystemIconButton}" >
                                         <fa5:SvgAwesome Icon="Solid_ExclamationTriangle"
                                                         Foreground="{StaticResource TextColor}"></fa5:SvgAwesome>
+                                    </Button> 
+
+                                    <Button Grid.Column="2" 
+                                            Style="{StaticResource SystemIconButton}" 
+                                            Command="{Binding SelectLanguage}">
+                                        <Image Margin="2"
+                                            Source="../../Assets/image/lang/ru.png"/>
                                     </Button>
 
-                                    <TextBlock Grid.Column="2" 
+                                    <TextBlock Grid.Column="3" 
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Center"
                                                Foreground="#ffffff"
                                                Text="{Binding Path=Title}"/>
 
-                                    <StackPanel Grid.Column="3"
+                                    <StackPanel Grid.Column="4"
                                                 Orientation="Horizontal">
                                         <Button Width="24"
                                                 Style="{StaticResource SystemIconButton}"
@@ -103,6 +113,7 @@
                                         ClipToBounds="True">
                                     <ContentPresenter Content="{TemplateBinding Content}"/>
                                 </Border>
+                                
                             </Grid>
                         </Border>
                     </ControlTemplate>
@@ -118,7 +129,9 @@
             GlassFrameThickness="0"/>
     </WindowChrome.WindowChrome>
 
+
     <Grid Background="#2f3136">
+
         <Frame Name="MainFrame" NavigationUIVisibility="Hidden">
             <Frame.RenderTransform>
                 <TransformGroup>
@@ -128,5 +141,7 @@
                 </TransformGroup>
             </Frame.RenderTransform>
         </Frame>
+
+
     </Grid>
 </Window>

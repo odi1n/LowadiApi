@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -11,7 +13,7 @@ using LowadiBot.ViewModels.Base;
 
 namespace LowadiBot.ViewModels
 {
-    internal class MainWIndowViewModel :  ViewModel
+    internal class MainWIndowViewModel : ViewModel
     {
         private string _title = "Howrse-Lowadi Bot";
 
@@ -67,12 +69,37 @@ namespace LowadiBot.ViewModels
 
         private void OnMenuCommandExecute(object parameter)
         {
-            var position = Mouse.GetPosition(Application.Current.MainWindow); 
+            var position = Mouse.GetPosition(Application.Current.MainWindow);
             var point = new Point(position.X + Application.Current.MainWindow.Left, position.Y + Application.Current.MainWindow.Top);
 
             SystemCommands.ShowSystemMenu(Application.Current.MainWindow, point);
         }
 
+        #endregion
+
+        #region SelectLanguage
+        public ICommand SelectLanguage { get; set; }
+
+        private bool CanSelectLanguageExecute(object p) => true;
+
+        private void OnSelectLanguageExecuted(object p)
+        {
+            if (MessageBox.Show("Приложение будет перезапущено", "Изменить язык", MessageBoxButton.OKCancel,
+                MessageBoxImage.Information) == MessageBoxResult.OK)
+            {
+                if (Properties.Settings.Default.LanguageCode == "ru-RU")
+                    Properties.Settings.Default.LanguageCode = "en-US";
+                else
+                    Properties.Settings.Default.LanguageCode = "ru-RU";
+                Properties.Settings.Default.Save();
+
+                Thread.CurrentThread.CurrentCulture = new CultureInfo(Properties.Settings.Default.LanguageCode);
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo(Properties.Settings.Default.LanguageCode);
+
+                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                Application.Current.Shutdown();
+            }
+        }
         #endregion
 
 
@@ -86,8 +113,6 @@ namespace LowadiBot.ViewModels
         }
 
 
-
-
         public MainWIndowViewModel()
         {
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
@@ -95,6 +120,7 @@ namespace LowadiBot.ViewModels
             FormWindowStateMaximizedCommand = new LambdaCommand(OnFormWindowStateMaximizedCommandExecuted, CanFormWindowStateMaximizedCommandExecute);
             LoadedApplicationCommand = new LambdaCommand(OnLoadedApplicationCommandExecute, CanLoadedApplicationCommandExecute);
             MenuCommand = new LambdaCommand(OnMenuCommandExecute, CanMenuCommandExecute);
+            SelectLanguage = new LambdaCommand(OnSelectLanguageExecuted, CanSelectLanguageExecute);
         }
     }
 }

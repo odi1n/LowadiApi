@@ -42,6 +42,7 @@
       <HintPath>..\packages\FontAwesome5.2.1.6\lib\net472\FontAwesome5.Net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -88,6 +89,16 @@
     <Compile Include="Infrastructure\Commands\LambdaCommand.cs" />
     <Compile Include="Infrastructure\Commands\Windows\CloseApplicationCommand.cs" />
     <Compile Include="Infrastructure\Commands\Windows\FormWindowsState.cs" />
+    <Compile Include="Langs\Lang.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lang.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Langs\Lang.en.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lang.en.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\Base\ViewModel.cs" />
     <Compile Include="ViewModels\LoginWindowViewModel.cs" />
@@ -114,6 +125,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Langs\Lang.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Lang.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Langs\Lang.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Lang.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -129,7 +149,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assets\image\" />
     <Folder Include="Data\" />
     <Folder Include="Forms\" />
     <Folder Include="Models\" />
@@ -140,6 +159,9 @@
     <Resource Include="Assets\favicon.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Image1.bmp" />
+    <Resource Include="Assets\image\lang\en.png" />
+    <Resource Include="Assets\image\lang\ru.png" />
     <Content Include="Assets\svg\close.svg" />
     <Resource Include="Views\Windows\favicon.png" />
   </ItemGroup>
