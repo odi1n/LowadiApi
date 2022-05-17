@@ -1,0 +1,56 @@
+﻿<Page x:Class="LowadiBot.Auth"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:LowadiBot"
+      mc:Ignorable="d" 
+      d:DesignHeight="450"
+      Title="Auth" Width="706.201">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,60">
+            <StackPanel>
+                <TextBlock Text="Логин"/>
+                <TextBox Margin="0,10" Text="выфвфыв"/>
+                <TextBlock Text="Пароль"/>
+                <PasswordBox 
+                    Width="160"
+                    Name="PasswordText"
+                    Margin="0,10"/>
+                <CheckBox 
+                    FontSize="14"
+                    Content="Запомнить данные"/>
+            </StackPanel>
+            <Separator/>
+            <StackPanel>
+                <TextBlock Text="Прокси"/>
+                <TextBlock  Text="IP" Margin="0,10,0,0"/>
+                <TextBox />
+                <TextBlock  Text="Логин"/>
+                <TextBox />
+                <TextBlock Text="Пароль"/>
+                <TextBox  Margin="0,0,0,5"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Сервер"/>
+                <ComboBox>
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+            <Button 
+                Margin="0,10,0,0"
+                Height="25"
+                Content="Войти"
+                FontSize="14"></Button>
+        </StackPanel>
+    </Grid>
+</Page>
