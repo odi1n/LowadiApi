@@ -5,10 +5,9 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:LowadiBot.Views.Pages"
       xmlns:vm="clr-namespace:LowadiBot.ViewModels"
-      xmlns:lang="clr-namespace:LowadiBot.Langs"
-
+      xmlns:lang="clr-namespace:LowadiBot.Langs" xmlns:fa5="http://schemas.fontawesome.com/icons/"
       mc:Ignorable="d" 
-      d:DesignHeight="700" d:DesignWidth="600"
+      d:DesignHeight="600" d:DesignWidth="600"
       Title="LoginPage">
 
     <Page.DataContext>
@@ -18,102 +17,6 @@
     <Page.Resources>
         <Style x:Key="CenterText" TargetType="TextBlock" BasedOn="{StaticResource TextBlockStyle}">
             <Setter Property="HorizontalAlignment" Value="Center"/>
-        </Style>
-
-        <Style  TargetType="DataGrid">
-            <Setter Property="Background" Value="#333"/>
-            <Setter Property="BorderBrush" Value="#333" />
-            <Setter Property="HorizontalGridLinesBrush" Value="#FF646464" />
-            <Setter Property="VerticalGridLinesBrush" Value="#FF646464" />
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-            <Setter Property="VerticalAlignment" Value="Stretch"/>
-            <Setter Property="AutoGenerateColumns" Value="False"/>
-
-            <Setter Property="ColumnHeaderStyle">
-                <Setter.Value>
-                    <Style TargetType="DataGridColumnHeader">
-                        <Setter Property="Padding" Value="8"/>
-                        <Setter Property="FontSize" Value="14"/>
-                        <Setter Property="Foreground" Value="#fff"/>
-                        <Setter Property="Background" Value="#FF232323"/>
-                        <Setter Property="SeparatorBrush" Value="#fff"/>
-                        <Setter Property="BorderBrush" Value="#fff"/>
-                        <Setter Property="SeparatorVisibility" Value="Visible"/>
-                    </Style>
-                </Setter.Value>
-            </Setter>
-
-            <Setter Property="RowHeaderStyle">
-                <Setter.Value>
-                    <Style TargetType="DataGridRowHeader">
-                        <Setter Property="Width" Value="0"/>
-                    </Style>
-                </Setter.Value>
-            </Setter>
-
-            <Setter Property="RowStyle">
-                <Setter.Value>
-                    <Style TargetType="DataGridRow">
-                        <Setter Property="Background" Value="#FF404040" />
-                        <Setter Property="Foreground" Value="#ffffff" />
-
-                        <Style.Triggers>
-                            <!-- Highlight a grid row as the mouse passes over -->
-                            <Trigger Property="IsMouseOver" Value="True">
-
-                                <Setter Property="Foreground" Value="#FF404040" />
-                                <Setter Property="Background" Value="#FFBDBDBD" />
-
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Setter.Value>
-            </Setter>
-
-
-            <Setter Property="CellStyle">
-                <Setter.Value>
-                    <Style TargetType="DataGridCell">
-                        <Style.Triggers>
-                            <!-- Highlight selected rows -->
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="#ff66ccff" />
-                                <Setter Property="BorderBrush" Value="Transparent" />
-                                <Setter Property="Foreground" Value="Black" />
-                            </Trigger>
-                            <Trigger Property="IsFocused" Value="True">
-                                <Setter Property="Background" Value="#ff66ccff" />
-                                <Setter Property="BorderBrush" Value="Black" />
-                                <Setter Property="BorderThickness" Value="1"/>
-                                <Setter Property="Foreground" Value="Black" />
-                            </Trigger>
-                        </Style.Triggers>
-                        <!-- Add some padding around the contents of a cell -->
-                        <Setter Property="Padding" Value="4,3,4,3" />
-                        <Setter Property="BorderBrush" Value="Transparent"/>
-                        <Setter Property="BorderThickness" Value="1"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="DataGridCell">
-                                    <Border Padding="{TemplateBinding Padding}" 
-                                            BorderBrush="{TemplateBinding BorderBrush}"
-                                            BorderThickness="{TemplateBinding BorderThickness}"
-                                            Background="{TemplateBinding Background}">
-                                        <ContentPresenter />
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <Setter Property="FocusVisualStyle">
-                            <Setter.Value>
-                                <Style TargetType="Control">
-                                    <Setter Property="BorderBrush" Value="Transparent" />
-                                </Style>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </Setter.Value>
-            </Setter>
         </Style>
 
         <Style TargetType="Button" BasedOn="{StaticResource MainStyleButton}">
@@ -137,52 +40,89 @@
     </Page.Resources>
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="35"/>
-        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="0">
-            <DataGrid Name="Accounts"
-                      ItemsSource="{Binding Accouts}" 
-                      BorderThickness="0"
-                      CanUserAddRows="False">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Логин" 
-                                        Binding="{Binding Login}"
-                                        Width="*" DisplayIndex="0" />
-                    <DataGridTextColumn Header="Пароль" 
-                                        Binding="{Binding Password}"
-                                        Width="*"/>
-                    <DataGridTextColumn Header="Proxy" 
-                                        Width="*">
-                        <DataGridTextColumn.Binding>
-                            <MultiBinding StringFormat="{}{0}:{1}">
-                                <Binding Path="Proxy.Proxy" />
-                                <Binding Path="Proxy.Port" />
-                            </MultiBinding>
-                        </DataGridTextColumn.Binding>
-                    </DataGridTextColumn>
-                </DataGrid.Columns>
-            </DataGrid>
+        <StackPanel Grid.Column="0" 
+                        HorizontalAlignment="Center"
+                        MinWidth="250"
+                        VerticalAlignment="Center"
+                                            Margin="5">
+            <TextBlock Text="Логин"
+                                               Style="{StaticResource TextBlockStyle}"/>
+            <TextBox Text="xdas"
+                                             Style="{StaticResource TextBoxStyle}"/>
+            <TextBlock Text="Пароль"
+                                               Style="{StaticResource TextBlockStyle}"/>
+            <PasswordBox Password="xdas"
+                                                 Style="{StaticResource PasswordBoxStyle}"/>
+            <CheckBox Content="Сохранить"
+                                              Style="{StaticResource CheckBoxStyle}"/>
+            <CheckBox Content="Прокси"
+                                              Style="{StaticResource CheckBoxStyle}"
+                                              IsChecked="{Binding Proxy}"/>
+
+            <StackPanel Visibility="{Binding ProxyV}">
+                <Separator/>
+                <TextBlock Text="Ip:Port"
+                                                   Style="{StaticResource TextBlockStyle}"/>
+                <TextBox Text="xdas"
+                                                 Style="{StaticResource TextBoxStyle}"/>
+                <TextBlock Text="Логин"
+                                                   Style="{StaticResource TextBlockStyle}"/>
+                <TextBox Text="xdas"
+                                                 Style="{StaticResource TextBoxStyle}"/>
+                <TextBlock Text="Пароль"
+                                                   Style="{StaticResource TextBlockStyle}"/>
+                <PasswordBox Password="xdas"
+                                                     Style="{StaticResource PasswordBoxStyle}"/>
+                <Separator/>
+            </StackPanel>
+
+            <TextBlock Text="Сервер"
+                                               Style="{StaticResource TextBlockStyle}"/>
+            <ComboBox Style="{StaticResource ComboBoxStyle}">
+                <ComboBoxItem Content="dasd"/>
+            </ComboBox>
+
+            <Button Content="Войти"
+                                            Style="{StaticResource ButtonStyle}"/>
+        </StackPanel>
+
+
+        <Grid Grid.Column="1"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              MinWidth="250"
+              Height="465">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="35"/>
+            </Grid.RowDefinitions>
+
+            <ListBox  Grid.Row="0"
+                    Background="#333"
+                     Foreground="#fff"
+                    ItemsSource="{Binding Accouts}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Foreground="#fff"
+                                       Text="{Binding Login}">
+                            </TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+
+            <Button Grid.Row="1"
+                        Content="{x:Static lang:Lang.F_Remove}"
+                        Style="{StaticResource ButtonStyle}"/>
         </Grid>
 
-        <Grid Grid.Row="1"
-              Background="#FF232323">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0"
-                Content="{x:Static lang:Lang.F_Enter}"/>
-
-            <Button Grid.Column="1"
-                Content="{x:Static lang:Lang.F_Addition}"/>
-
-            <Button Grid.Column="2"
-                Content="{x:Static lang:Lang.F_Remove}"/>
-        </Grid>
     </Grid>
 </Page>

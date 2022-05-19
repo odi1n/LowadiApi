@@ -8,7 +8,6 @@
         xmlns:vm="clr-namespace:LowadiBot.ViewModels"
         xmlns:local="clr-namespace:LowadiBot"
         xmlns:lang="clr-namespace:LowadiBot.Langs"
-
         xmlns:fa5="http://schemas.fontawesome.com/icons/"
 
         mc:Ignorable="d"
@@ -17,7 +16,7 @@
         WindowStyle="None"
         AllowsTransparency="True"
 
-        Height="700"
+        Height="600"
         Width="600"
         MinHeight="350" 
         MinWidth="300"

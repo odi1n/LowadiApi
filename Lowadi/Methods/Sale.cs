@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using AngleSharp;
 using AngleSharp.Dom;
 using AngleSharp.Html.Parser;
-using AngleSharp.XPath;
 using Lowadi.Models;
 using Lowadi.Models.Type;
 using Lowadi.Others;

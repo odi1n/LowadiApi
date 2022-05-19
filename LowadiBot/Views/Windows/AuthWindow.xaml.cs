@@ -10,22 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using LowadiBot.Views.Pages;
-using LowadiBot.Views.Windows;
 
-namespace LowadiBot
+namespace LowadiBot.Views.Windows
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для AuthWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AuthWindow : Window
     {
-        public MainWindow()
+        public AuthWindow()
         {
             InitializeComponent();
-            this.MainFrame.Content = new LoginPage();
         }
     }
 }

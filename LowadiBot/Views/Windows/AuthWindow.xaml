@@ -1,0 +1,130 @@
+﻿<Window x:Class="LowadiBot.Views.Windows.AuthWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+       
+        xmlns:cmd="clr-namespace:LowadiBot.Infrastructure.Commands.Windows"
+        xmlns:vm="clr-namespace:LowadiBot.ViewModels"
+        xmlns:lowadiBot="clr-namespace:LowadiBot"
+        xmlns:lang="clr-namespace:LowadiBot.Langs"
+        xmlns:fa5="http://schemas.fontawesome.com/icons/"
+        xmlns:windows="clr-namespace:LowadiBot.Views.Windows"
+
+        mc:Ignorable="d"
+        Title="Авторизация" 
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Height="500" Width="300"
+        MinHeight="500" MinWidth="300">
+
+    <Window.DataContext>
+        <vm:AuthWindowViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+        <Style TargetType="{x:Type Frame}">
+            <Setter Property="RenderTransformOrigin" Value="0.5, 0"/>
+        </Style>
+
+        <Style TargetType="{x:Type windows:AuthWindow}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Window">
+                        <Border BorderThickness="2" 
+                                BorderBrush="Black"
+                                Background="#2f3136">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="24"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid Background="#202225"
+                                      Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Grid.Column="0" 
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"
+                                               Foreground="#ffffff"
+                                               Text="Авторизация"/>
+
+                                    <StackPanel Grid.Column="1"
+                                                Orientation="Horizontal">
+                                        <Button Width="24"
+                                                Style="{StaticResource SystemIconButton}">
+                                            <fa5:SvgAwesome Icon="Regular_WindowMinimize"
+                                                            Style="{StaticResource SvgAwesomeStyle}"/>
+                                        </Button>
+                                        <Button Width="24"
+                                                Style="{StaticResource WindowCloseButton}">
+                                            <fa5:SvgAwesome Icon="Regular_WindowClose"
+                                                            Style="{StaticResource SvgAwesomeStyle}"/>
+                                        </Button>
+                                    </StackPanel>
+                                </Grid>
+
+                                <StackPanel Grid.Row="2" 
+                                            Margin="5">
+                                    <TextBlock Text="Логин"
+                                               Style="{StaticResource TextBlockStyle}"/>
+                                    <TextBox Text="xdas"
+                                             Style="{StaticResource TextBoxStyle}"/>
+                                    <TextBlock Text="Пароль"
+                                               Style="{StaticResource TextBlockStyle}"/>
+                                    <PasswordBox Password="xdas"
+                                                 Style="{StaticResource PasswordBoxStyle}"/>
+                                    <CheckBox Content="Сохранить"
+                                              Style="{StaticResource CheckBoxStyle}"/>
+                                    <CheckBox Content="Прокси"
+                                              Style="{StaticResource CheckBoxStyle}"
+                                              IsChecked="{Binding Proxy}"/>
+
+                                    <StackPanel Visibility="{Binding ProxyV}">
+                                        <Separator/>
+                                        <TextBlock Text="Ip:Port"
+                                                   Style="{StaticResource TextBlockStyle}"/>
+                                        <TextBox Text="xdas"
+                                                 Style="{StaticResource TextBoxStyle}"/>
+                                        <TextBlock Text="Логин"
+                                                   Style="{StaticResource TextBlockStyle}"/>
+                                        <TextBox Text="xdas"
+                                                 Style="{StaticResource TextBoxStyle}"/>
+                                        <TextBlock Text="Пароль"
+                                                   Style="{StaticResource TextBlockStyle}"/>
+                                        <PasswordBox Password="xdas"
+                                                     Style="{StaticResource PasswordBoxStyle}"/>
+                                        <Separator/>
+                                    </StackPanel>
+
+                                    <TextBlock Text="Сервер"
+                                               Style="{StaticResource TextBlockStyle}"/>
+                                    <ComboBox Style="{StaticResource ComboBoxStyle}">
+                                        <ComboBoxItem Content="dasd"/>
+                                    </ComboBox>
+
+                                    <Button Content="Войти"
+                                            Style="{StaticResource ButtonStyle}"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome
+            ResizeBorderThickness="6"
+            CaptionHeight="24"
+            GlassFrameThickness="0"/>
+    </WindowChrome.WindowChrome>
+
+</Window>

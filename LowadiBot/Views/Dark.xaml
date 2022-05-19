@@ -33,25 +33,6 @@
         </Setter>
     </Style>
 
-    <!--Input-->
-    <Style TargetType="TextBlock" x:Key="TextBlockStyle" >
-        <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="Margin" Value="0,5"></Setter>
-    </Style>
-
-    <Style TargetType="TextBox" x:Key="TextBoxStyle">
-        <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
-        <Setter Property="Background" Value="{StaticResource Header}"/>
-        <Setter Property="Margin" Value="0,5"/>
-    </Style>
-
-    <Style TargetType="PasswordBox" x:Key="PasswordBoxStyle">
-        <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
-        <Setter Property="Background" Value="{StaticResource Header}"/>
-        <Setter Property="Margin" Value="0,5"/>
-    </Style>
-
     <Style TargetType="Button" x:Key="SystemIconButton" BasedOn="{StaticResource MainStyleButton}">
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
         <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
@@ -71,11 +52,52 @@
         </Style.Triggers>
     </Style>
 
-    <Style TargetType="Button" BasedOn="{StaticResource MainStyleButton}">
+    <!--Input-->
+    <Style TargetType="TextBlock" x:Key="TextBlockStyle">
+        <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="0,5"></Setter>
+    </Style>
+
+    <Style TargetType="TextBox" x:Key="TextBoxStyle">
+        <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+        <Setter Property="Background" Value="{StaticResource Header}"/>
+        <Setter Property="Margin" Value="0,5"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+
+    <Style TargetType="PasswordBox" x:Key="PasswordBoxStyle">
+        <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+        <Setter Property="Background" Value="{StaticResource Header}"/>
+        <Setter Property="Margin" Value="0,5"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+
+    <Style TargetType="CheckBox" x:Key="CheckBoxStyle">
+        <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+        <Setter Property="Background" Value="{StaticResource Header}"/>
+        <Setter Property="Margin" Value="0,2"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+
+        <Style.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" Value="{StaticResource TextColor}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="Button" x:Key="ButtonStyle" BasedOn="{StaticResource MainStyleButton}">
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
         <Setter Property="Background" Value="#FF6E6E6E"/>
         <Setter Property="Foreground" Value="#ffffff"/>
-        <Setter Property="Margin" Value="5"></Setter>
+        <Setter Property="Height" Value="25"></Setter>
+        <Setter Property="Margin" Value="0,5"></Setter>
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
@@ -88,4 +110,15 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+    <Style TargetType="ComboBox" x:Key="ComboBoxStyle">
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+        <Setter Property="Background" Value="#fff"/>
+        <Setter Property="Foreground" Value="#333"/>
+        <Setter Property="Margin" Value="0,5"/>
+    </Style>
+
+
 </ResourceDictionary>

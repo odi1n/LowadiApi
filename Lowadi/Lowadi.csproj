@@ -35,10 +35,6 @@
       <HintPath>..\packages\AngleSharp.0.16.1\lib\net461\AngleSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="AngleSharp.XPath, Version=1.1.7.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea">
-      <HintPath>..\packages\AngleSharp.XPath.1.1.7\lib\netstandard2.0\AngleSharp.XPath.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Fizzler">
       <HintPath>..\packages\Fizzler.Tools.1.1.0\tools\Fizzler.dll</HintPath>
     </Reference>
