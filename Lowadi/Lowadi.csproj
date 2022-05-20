@@ -84,12 +84,14 @@
     <Compile Include="Interface\Methods\ISale.cs" />
     <Compile Include="Methods\Sale.cs" />
     <Compile Include="Models\Base.cs" />
+    <Compile Include="Models\Horse\ActionInfo.cs" />
     <Compile Include="Models\Horse\Buy.cs" />
     <Compile Include="Models\Horse\BuyHorse.cs" />
     <Compile Include="Models\Horse\Factory.cs" />
     <Compile Include="Models\Horse\Horses.cs" />
     <Compile Include="Models\Horse\MyHorse.cs" />
     <Compile Include="Models\Horse\Page.cs" />
+    <Compile Include="Models\Horse\RedirectInfo.cs" />
     <Compile Include="Others\Addition.cs" />
     <Compile Include="Others\JsonConvert.cs" />
     <Compile Include="Others\Request.cs" />

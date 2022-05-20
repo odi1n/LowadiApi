@@ -42,13 +42,13 @@ namespace Lowadi_Test
             //     }
             // }
 
-            var factories = await lowApi.Horse.GetFactory();
-            var page = await lowApi.Horse.GetAllHorse(factories.Last().Id);
+            // var factories = await lowApi.Horse.GetFactory();
+            // var page = await lowApi.Horse.GetAllHorse(factories.Last().Id);
 
-            var horse = page.Horses.First(x=>x.Id == 52763688);
-            await lowApi.Horse.GetHorseInfo(horse.Id);
+            // var horse = page.Horses.First(x=>x.Id == 52763688);
+            await lowApi.Horse.GetHorseInfo(56436614);
             var doSuckle = await lowApi.Horse.DoSuckle();
-            doSuckle = await lowApi.Horse.DoCentreMission(52763688);
+            doSuckle = await lowApi.Horse.DoCentreMission(56381122);
             doSuckle = await lowApi.Horse.DoEat();
             // doSuckle = await lowApi.Horse.DoDrink();
             // doSuckle = await lowApi.Horse.DoStroke();

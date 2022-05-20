@@ -29,6 +29,7 @@ namespace Lowadi.Methods
         private const string _pageDoStroke = _pageMain + "/elevage/chevaux/doStroke";
         private const string _pageDoGroom = _pageMain + "/elevage/chevaux/doGroom";
         private const string _pageDoEatTreat = _pageMain + "/elevage/chevaux/doEatTreat";
+        private const string _pageDoPlay = _pageMain + "/elevage/chevaux/doPlay";
         private const string _pageDoEat = _pageMain + "/elevage/chevaux/doEat";
         private const string _pageDoNight = _pageMain + "/elevage/chevaux/doNight";
         private const string _pageDoAge = _pageMain + "/elevage/chevaux/doAge";
@@ -181,6 +182,9 @@ namespace Lowadi.Methods
         private int ParsData(string pageInfo, string selector)
         {
             IHtmlDocument document = new HtmlParser().ParseDocument(_dataPageHorseInfo);
+            if (document.QuerySelector(selector) == null)
+                return 0;
+
             var count = document.QuerySelector(selector).Text().Replace(" ", "");
             return int.Parse(count);
         }
@@ -189,7 +193,7 @@ namespace Lowadi.Methods
         /// Уход - дать молока
         /// </summary>
         /// <returns></returns>
-        public async Task<string> DoSuckle()
+        public async Task<ActionInfo> DoSuckle()
         {
             var param = ParsInput(_dataPageHorseInfo, "form-do-suckle");
             if (param.Count == 0)
@@ -197,7 +201,8 @@ namespace Lowadi.Methods
 
             using (var response = await _request.PostAsync(_pageDoSuckle, param))
             {
-                return await response.Content.ReadAsStringAsync();
+                string content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.Deserialize<ActionInfo>(content);
             }
         }
 
@@ -205,7 +210,7 @@ namespace Lowadi.Methods
         /// Уход - Кормить
         /// </summary>
         /// <returns></returns>
-        public async Task<string> DoEat(int forageCount = 0, int oatsCount = 0)
+        public async Task<ActionInfo> DoEat(int forageCount = 0, int oatsCount = 0)
         {
             Dictionary<string, string> param = ParsInput(_dataPageHorseInfo, "feeding");
 
@@ -218,14 +223,17 @@ namespace Lowadi.Methods
                 oatsCount = ParsData(_dataPageHorseInfo, ".section-avoine.section-avoine-target");
 
             var forage = ParsInput(_dataPageHorseInfo, "haySlider-sliderHidden", "feeding", forageCount);
-            param.Add(forage.First().Key, forage.First().Value);
+            if (forage.Count > 0)
+                param.Add(forage.First().Key, forage.First().Value);
 
             var oats = ParsInput(_dataPageHorseInfo, "oatsSlider-sliderHidden", "feeding", oatsCount);
-            param.Add(oats.First().Key, oats.First().Value);
+            if (oats.Count > 0)
+                param.Add(oats.First().Key, oats.First().Value);
 
             using (HttpResponseMessage response = await _request.PostAsync(_pageDoEat, param))
             {
-                return await response.Content.ReadAsStringAsync();
+                string content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.Deserialize<ActionInfo>(content);
             }
         }
 
@@ -233,7 +241,7 @@ namespace Lowadi.Methods
         /// Уход - дать воды
         /// </summary>
         /// <returns></returns>
-        public async Task<string> DoDrink()
+        public async Task<ActionInfo> DoDrink()
         {
             var param = ParsInput(_dataPageHorseInfo, "form-do-drink");
             if (param.Count == 0)
@@ -241,7 +249,8 @@ namespace Lowadi.Methods
 
             using (var response = await _request.PostAsync(_pageDoDrink, param))
             {
-                return await response.Content.ReadAsStringAsync();
+                string content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.Deserialize<ActionInfo>(content);
             }
         }
 
@@ -249,7 +258,7 @@ namespace Lowadi.Methods
         /// Уход - Ласкать
         /// </summary>
         /// <returns></returns>
-        public async Task<string> DoStroke()
+        public async Task<ActionInfo> DoStroke()
         {
             var param = ParsInput(_dataPageHorseInfo, "form-do-stroke");
             if (param.Count == 0)
@@ -257,7 +266,8 @@ namespace Lowadi.Methods
 
             using (var response = await _request.PostAsync(_pageDoStroke, param))
             {
-                return await response.Content.ReadAsStringAsync();
+                string content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.Deserialize<ActionInfo>(content);
             }
         }
 
@@ -265,7 +275,7 @@ namespace Lowadi.Methods
         /// Уход - Чистить
         /// </summary>
         /// <returns></returns>
-        public async Task<string> DoGroom()
+        public async Task<ActionInfo> DoGroom()
         {
             var param = ParsInput(_dataPageHorseInfo, "form-do-groom");
             if (param.Count == 0)
@@ -273,7 +283,8 @@ namespace Lowadi.Methods
 
             using (var response = await _request.PostAsync(_pageDoGroom, param))
             {
-                return await response.Content.ReadAsStringAsync();
+                string content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.Deserialize<ActionInfo>(content);
             }
         }
 
@@ -281,7 +292,7 @@ namespace Lowadi.Methods
         /// Уход - Морковь
         /// </summary>
         /// <returns></returns>
-        public async Task<string> DoEatTreat()
+        public async Task<ActionInfo> DoEatTreat()
         {
             var param = ParsInput(_dataPageHorseInfo, "form-do-eat-treat-carotte");
             if (param.Count == 0)
@@ -289,7 +300,8 @@ namespace Lowadi.Methods
 
             using (var response = await _request.PostAsync(_pageDoEatTreat, param))
             {
-                return await response.Content.ReadAsStringAsync();
+                string content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.Deserialize<ActionInfo>(content);
             }
         }
 
@@ -297,16 +309,24 @@ namespace Lowadi.Methods
         /// Уход - Играть
         /// </summary>
         /// <returns></returns>
-        public async Task<string> DoPlay()
+        public async Task<ActionInfo> DoPlay()
         {
-            return null;
+            var param = ParsInput(_dataPageHorseInfo, "formCenterPlay");
+            if (param.Count == 0)
+                return null;
+
+            using (var response = await _request.PostAsync(_pageDoPlay, param))
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.Deserialize<ActionInfo>(content);
+            }
         }
 
         /// <summary>
         /// Уход - Отправить спать
         /// </summary>
         /// <returns></returns>
-        public async Task<string> DoNight()
+        public async Task<ActionInfo> DoNight()
         {
             var param = ParsInput(_dataPageHorseInfo, "form-do-night");
             if (param.Count == 0)
@@ -314,7 +334,8 @@ namespace Lowadi.Methods
 
             using (var response = await _request.PostAsync(_pageDoNight, param))
             {
-                return await response.Content.ReadAsStringAsync();
+                string content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.Deserialize<ActionInfo>(content);
             }
         }
 
@@ -322,7 +343,7 @@ namespace Lowadi.Methods
         /// Уход - Вырастить
         /// </summary>
         /// <returns></returns>
-        public async Task<string> DoAge()
+        public async Task<RedirectInfo> DoAge()
         {
             var param = ParsInput(_dataPageHorseInfo, "age");
             if (param.Count == 0)
@@ -330,7 +351,8 @@ namespace Lowadi.Methods
 
             using (var response = await _request.PostAsync(_pageDoAge, param))
             {
-                return await response.Content.ReadAsStringAsync();
+                string content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.Deserialize<RedirectInfo>(content);
             }
         }
 
@@ -338,13 +360,14 @@ namespace Lowadi.Methods
         /// Выполнить миссию
         /// </summary>
         /// <returns></returns>
-        public async Task<string> DoCentreMission(int idHorse)
+        public async Task<ActionInfo> DoCentreMission(int idHorse)
         {
             Dictionary<string, string> param = new Dictionary<string, string>() { ["id"] = idHorse.ToString() };
 
             using (var response = await _request.PostAsync(_pageDoCentreMission, param))
             {
-                return await response.Content.ReadAsStringAsync();
+                string content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.Deserialize<ActionInfo>(content);
             }
         }
 
@@ -354,7 +377,7 @@ namespace Lowadi.Methods
         /// <param name="walk">Тип прогулки</param>
         /// <param name="value">На сколько сделать прогулку</param>
         /// <returns></returns>
-        public async Task<string> DoWalk(Walk walk, int value = 1)
+        public async Task<ActionInfo> DoWalk(Walk walk, int value = 1)
         {
             Dictionary<string, string> param = new Dictionary<string, string>();
             if (walk == Walk.Foret)
@@ -379,7 +402,8 @@ namespace Lowadi.Methods
 
             using (HttpResponseMessage response = await _request.PostAsync(_pageDoCentreMission, param))
             {
-                return await response.Content.ReadAsStringAsync();
+                string content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.Deserialize<ActionInfo>(content);
             }
         }
     }

@@ -14,18 +14,18 @@ namespace Lowadi.Interface.Methods
         Task<MyHorse> GetAllHorse(int idFactory);
         Task GetHorseInfo(int idHorse);
 
-        Task<string> DoSuckle();
-        Task<string> DoEat(int forageCount = 0, int oatsCount = 0);
-        Task<string> DoDrink();
-        Task<string> DoStroke();
-        Task<string> DoGroom();
-        Task<string> DoEatTreat();
-        Task<string> DoPlay();
-        Task<string> DoNight();
-        Task<string> DoAge();
+        Task<ActionInfo> DoSuckle();
+        Task<ActionInfo> DoEat(int forageCount = 0, int oatsCount = 0);
+        Task<ActionInfo> DoDrink();
+        Task<ActionInfo> DoStroke();
+        Task<ActionInfo> DoGroom();
+        Task<ActionInfo> DoEatTreat();
+        Task<ActionInfo> DoPlay();
+        Task<ActionInfo> DoNight();
+        Task<RedirectInfo> DoAge();
 
-        Task<string> DoCentreMission(int idHorse);
+        Task<ActionInfo> DoCentreMission(int idHorse);
 
-        Task<string> DoWalk(Walk walk, int value = 1);
+        Task<ActionInfo> DoWalk(Walk walk, int value = 1);
     }
 }
