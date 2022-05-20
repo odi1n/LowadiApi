@@ -78,8 +78,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interface\ILowadiApi.cs" />
+    <Compile Include="Interface\Methods\IAuth.cs" />
+    <Compile Include="Interface\Methods\IHorse.cs" />
+    <Compile Include="Interface\Methods\ISale.cs" />
     <Compile Include="Methods\Sale.cs" />
-    <Compile Include="Models\Type\Sex.cs" />
+    <Compile Include="Models\Base.cs" />
+    <Compile Include="Models\Horse\Buy.cs" />
+    <Compile Include="Models\Horse\BuyHorse.cs" />
+    <Compile Include="Models\Horse\Factory.cs" />
+    <Compile Include="Models\Horse\Horses.cs" />
+    <Compile Include="Models\Horse\MyHorse.cs" />
+    <Compile Include="Models\Horse\Page.cs" />
     <Compile Include="Others\Addition.cs" />
     <Compile Include="Others\JsonConvert.cs" />
     <Compile Include="Others\Request.cs" />
@@ -92,6 +102,9 @@
     <Compile Include="Models\Auth\ErrorModels.cs" />
     <Compile Include="Models\Horse\Corrals.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Type\Sex.cs" />
+    <Compile Include="Type\TypeSale.cs" />
+    <Compile Include="Type\Walk.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

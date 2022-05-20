@@ -5,13 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using AngleSharp.Dom;
 using AngleSharp.Html.Parser;
+using Lowadi.Interface;
+using Lowadi.Interface.Methods;
 using Lowadi.Models;
 using Lowadi.Methods;
 using Lowadi.Others;
 
 namespace Lowadi
 {
-    public class LowadiApi
+    public class LowadiApi : ILowadiApi
     {
         /// <summary>
         /// Экю
@@ -34,12 +36,13 @@ namespace Lowadi
 
         public async Task<ErrorModels> Login(string login, string password)
         {
-            string authData = await new Auth(login, password, _request).Oauth();
+            IAuth auth = new Auth(login, password, _request);
+            var authData = await auth.Oauth();
+
             Horse = new Horse(_request);
 
             return JsonConvert.Deserialize<ErrorModels>(authData);
         }
-
 
         internal static void GetBalance(string page)
         {

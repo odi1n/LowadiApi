@@ -15,7 +15,8 @@ namespace Lowadi.Others
 
         public Request()
         {
-            _httpClient = new HttpClient();
+            HttpClientHandler handler = new HttpClientHandler() { AllowAutoRedirect = true };
+            _httpClient = new HttpClient(handler);
         }
 
         public void AddHeader(string name, string value)
