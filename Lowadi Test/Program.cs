@@ -47,7 +47,7 @@ namespace Lowadi_Test
             var page = await lowApi.Horse.GetHorse(factories.ToList()[0].Id);
 
             // var horse = page.Horses.First(x=>x.Id == 52763688);
-            await lowApi.Horse.GetHorseInfo(42707347);
+            await lowApi.Horse.GetHorseInfo(68512390);
             // var doSuckle = await lowApi.Horse.DoSuckle();
             // doSuckle = await lowApi.Horse.DoCentreMission(56381122);
             // doSuckle = await lowApi.Horse.DoEat();
