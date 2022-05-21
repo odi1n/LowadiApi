@@ -181,7 +181,7 @@ namespace Lowadi.Methods
 
         private int ParsData(string pageInfo, string selector)
         {
-            IHtmlDocument document = new HtmlParser().ParseDocument(_dataPageHorseInfo);
+            IHtmlDocument document = new HtmlParser().ParseDocument(pageInfo);
             if (document.QuerySelector(selector) == null)
                 return 0;
 
@@ -406,5 +406,7 @@ namespace Lowadi.Methods
                 return JsonConvert.Deserialize<ActionInfo>(content);
             }
         }
+
+
     }
 }
