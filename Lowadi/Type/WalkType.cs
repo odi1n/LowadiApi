@@ -1,6 +1,6 @@
 ﻿namespace Lowadi.Models.Type
 {
-    public enum Walk
+    public enum WalkType
     {
         Montagne,
         Foret

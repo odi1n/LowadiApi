@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Lowadi.Methods;
 using Lowadi.Models;
 using Lowadi.Models.Type;
 
@@ -14,6 +15,8 @@ namespace Lowadi.Interface.Methods
         Task<MyHorse> GetAllHorse(int idFactory);
         Task GetHorseInfo(int idHorse);
 
+        Task<RedirectInfo> DoAge(string page = null);
+
         Task<ActionInfo> DoSuckle(string page = null);
         Task<ActionInfo> DoEat(int forageCount = 0, int oatsCount = 0, string page = null);
         Task<ActionInfo> DoDrink(string page = null);
@@ -22,9 +25,8 @@ namespace Lowadi.Interface.Methods
         Task<ActionInfo> DoEatTreat(string page = null);
         Task<ActionInfo> DoPlay(string page = null);
         Task<ActionInfo> DoNight(string page = null);
-        Task<RedirectInfo> DoAge(string page = null);
         Task<ActionInfo> DoCentreMission(int idHorse);
-        Task<ActionInfo> DoWalk(Walk walk, int value = 1, string page = null);
-        Task<ActionInfo> DoTraining();
+        Task<ActionInfo> DoWalk(WalkType walkType, int value = 1, string page = null);
+        Task<ActionInfo> DoTraining(TrainingType trainingType, int value = 1, string page = null);
     }
 }

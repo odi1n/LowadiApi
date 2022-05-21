@@ -13,7 +13,7 @@ using Lowadi.Others;
 
 namespace Lowadi.Methods
 {
-    public class Horse : IHorse
+    public partial class Horse : IHorse
     {
         public ISale Sale { get; set; }
         private Request _request;
@@ -31,8 +31,11 @@ namespace Lowadi.Methods
         private const string PageDoPlay = PageMain + "/elevage/chevaux/doPlay";
         private const string PageDoEat = PageMain + "/elevage/chevaux/doEat";
         private const string PageDoNight = PageMain + "/elevage/chevaux/doNight";
-        private const string PageDoAge = PageMain + "/elevage/chevaux/doAge";
         private const string PageDoCentreMission = PageMain + "/elevage/chevaux/doCentreMission";
+        private const string PageDoTraining = PageMain + "/elevage/chevaux/doTraining";
+
+        private const string PageDoAge = PageMain + "/elevage/chevaux/doAge";
+
 
         public Horse(Request request)
         {
@@ -149,14 +152,12 @@ namespace Lowadi.Methods
                 if (document.QuerySelector($"#{key}>input:nth-child({i})") == null)
                     break;
 
-                string name = document.QuerySelector($"#{key}>input:nth-child({i})").GetAttribute("name")
-                    .ToLower();
-                string cleareAll = Regex.Match(name, key + "(.*)").Groups[1].Value.ToLower();
+                string name = document.QuerySelector($"#{key}>input:nth-child({i})").GetAttribute("name");
+                string cleareAll = Regex.Match(name, key + "(.*)").Groups[1].Value;
 
-                string value1 = document.QuerySelector($"#{key}>input:nth-child({i})").GetAttribute("value")
-                    .ToLower();
+                string value1 = document.QuerySelector($"#{key}>input:nth-child({i})").GetAttribute("value");
 
-                param.Add(cleareAll == "" ? name : cleareAll, value1);
+                param.Add(cleareAll == "" ? name.ToLower() : cleareAll.ToLower(), value1.ToLower());
             }
 
             return param;
@@ -370,32 +371,27 @@ namespace Lowadi.Methods
             }
         }
 
-        struct Walks
-        {
-            public Walk Walk { get; set; }
-            public string Id { get; set; }
-            public string Key { get; set; }
-        }
+
 
         /// <summary>
         /// Выполнить прогулки
         /// </summary>
-        /// <param name="walk">Тип прогулки</param>
+        /// <param name="walkType">Тип прогулки</param>
         /// <param name="value">На сколько сделать прогулку</param>
         /// <param name="page">Страница откуда берем данные</param>
         /// <returns></returns>
-        public async Task<ActionInfo> DoWalk(Walk walk, int value = 1, string page = null)
+        public async Task<ActionInfo> DoWalk(WalkType walkType, int value = 1, string page = null)
         {
-            Walks walks = new List<Walks>() {
-                new Walks() { Walk = Walk.Foret, Key = "formbaladeForet", Id = "walkforetSlider-sliderHidden" },
-                new Walks() { Walk = Walk.Montagne, Key = "formbaladeMontagne", Id = "walkmontagneSlider-sliderHidden" }
-            }.First(x => x.Walk == walk);
+            Walk walk = new List<Walk>() {
+                new Walk() { WalkType = WalkType.Foret, Key = "formbaladeForet", Id = "walkforetSlider-sliderHidden" },
+                new Walk() { WalkType = WalkType.Montagne, Key = "formbaladeMontagne", Id = "walkmontagneSlider-sliderHidden" }
+            }.First(x => x.WalkType == walkType);
 
-            Dictionary<string, string> param = ParsInput(page ?? DataPageHorseInfo, walks.Key);
+            Dictionary<string, string> param = ParsInput(page ?? DataPageHorseInfo, walk.Key);
             if (param.Count == 0)
                 return null;
 
-            Dictionary<string, string> parsInput = ParsInput(page ?? DataPageHorseInfo, walks.Id, walks.Key, value);
+            Dictionary<string, string> parsInput = ParsInput(page ?? DataPageHorseInfo, walk.Id, walk.Key, value);
             param.Add(parsInput.First().Key, parsInput.First().Value);
 
             using (HttpResponseMessage response = await _request.PostAsync(PageDoCentreMission, param))
@@ -409,9 +405,29 @@ namespace Lowadi.Methods
         /// Прогулка
         /// </summary>
         /// <returns></returns>
-        public async Task<ActionInfo> DoTraining()
+        public async Task<ActionInfo> DoTraining(TrainingType trainingType, int value = 1, string page = null)
         {
-            return null;
+            Training training = new List<Training>() {
+                new Training() { TrainingType = TrainingType.Dressage, Key = "entrainementDressage", Id = "trainingDressageSlider-sliderHidden" },
+                new Training() { TrainingType = TrainingType.Endurance, Key = "entrainementEndurance", Id = "trainingEnduranceSlider-sliderHidden" },
+                new Training() { TrainingType = TrainingType.Galop, Key = "entrainementGalop", Id = "trainingGalopSlider-sliderHidden" },
+                new Training() { TrainingType = TrainingType.Saut, Key = "entrainementSaut", Id = "trainingSautSlider-sliderHidden" },
+                new Training() { TrainingType = TrainingType.Trot, Key = "entrainementTrot", Id = "trainingTrotSlider-sliderHidden" },
+                new Training() { TrainingType = TrainingType.Vitesse, Key = "entrainementVitesse", Id = "trainingVitesseSlider-sliderHidden" },
+            }.First(x=>x.TrainingType == trainingType);
+
+            Dictionary<string, string> param = ParsInput(page ?? DataPageHorseInfo, training.Key);
+            if (param.Count == 0)
+                return null;
+
+            Dictionary<string, string> parsInput = ParsInput(page ?? DataPageHorseInfo, training.Id, training.Key.ToLower(), value);
+            param.Add(parsInput.First().Key, parsInput.First().Value);
+
+            using (HttpResponseMessage response = await _request.PostAsync(PageDoTraining, param))
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.Deserialize<ActionInfo>(content);
+            }
         }
     }
 }

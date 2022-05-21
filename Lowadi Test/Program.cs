@@ -5,6 +5,7 @@ using Lowadi;
 using Lowadi.Interface;
 using Lowadi.Interface.Methods;
 using Lowadi.Models;
+using Lowadi.Models.Type;
 
 namespace Lowadi_Test
 {
@@ -46,16 +47,17 @@ namespace Lowadi_Test
             // var page = await lowApi.Horse.GetAllHorse(factories.Last().Id);
 
             // var horse = page.Horses.First(x=>x.Id == 52763688);
-            await lowApi.Horse.GetHorseInfo(56436614);
-            var doSuckle = await lowApi.Horse.DoSuckle();
-            doSuckle = await lowApi.Horse.DoCentreMission(56381122);
-            doSuckle = await lowApi.Horse.DoEat();
+            await lowApi.Horse.GetHorseInfo(42707347);
+            // var doSuckle = await lowApi.Horse.DoSuckle();
+            // doSuckle = await lowApi.Horse.DoCentreMission(56381122);
+            // doSuckle = await lowApi.Horse.DoEat();
             // doSuckle = await lowApi.Horse.DoDrink();
             // doSuckle = await lowApi.Horse.DoStroke();
             // doSuckle = await lowApi.Horse.DoGroom();
             // doSuckle = await lowApi.Horse.DoEatTreat();
-            doSuckle = await lowApi.Horse.DoNight();
+            // doSuckle = await lowApi.Horse.DoNight();
             // doSuckle = await lowApi.Horse.DoAge();
+            var trainig = await lowApi.Horse.DoTraining(TrainingType.Endurance, value:2);
             Console.WriteLine("OK");
         }
     }
