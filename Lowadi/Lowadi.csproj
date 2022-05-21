@@ -98,6 +98,7 @@
     <Compile Include="Models\Horse\RedirectInfo.cs" />
     <Compile Include="Models\Horse\Training.cs" />
     <Compile Include="Models\Horse\Walk.cs" />
+    <Compile Include="Models\Ksk\CentreInscription.cs" />
     <Compile Include="Models\Ksk\Inscription.cs" />
     <Compile Include="Others\Addition.cs" />
     <Compile Include="Others\JsonConvert.cs" />

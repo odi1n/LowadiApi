@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Lowadi.Attribute;
 using Lowadi.Interface.Methods;
+using Lowadi.Models;
 using Lowadi.Models.Ksk;
-using Lowadi.Models.Type.Ksk;
 using Lowadi.Others;
+using JsonConvert = Newtonsoft.Json.JsonConvert;
 
 namespace Lowadi.Methods
 {
@@ -19,6 +19,7 @@ namespace Lowadi.Methods
 
         private const string PageMain = "https://www.lowadi.com";
         private const string PageCentreSelection = PageMain + "/elevage/chevaux/centreSelection";
+        private const string PageDoCentreInscription = PageMain + "/elevage/chevaux/doCentreInscription";
 
 
         public Ksk(Request request)
@@ -27,13 +28,13 @@ namespace Lowadi.Methods
         }
 
         /// <summary>
-        /// Выбор Kck
+        /// Получить и отфильтровать кск
         /// </summary>
         /// <param name="inscription">Настройки</param>
         /// <param name="idHorse">Id лошади</param>
         /// <returns></returns>
         /// <exception cref="ValidationException">Валидация данных</exception>
-        public async Task<string> CentreInscription(Inscription inscription, int idHorse)
+        public async Task<CentreInscription> CentreInscription(Inscription inscription, int idHorse)
         {
             inscription.Cheval = idHorse;
 
@@ -45,7 +46,36 @@ namespace Lowadi.Methods
             using (var response = await _request.PostAsync(PageCentreSelection, inscription.GetParam()))
             {
                 string content = await response.Content.ReadAsStringAsync();
-                return content;
+                CentreInscription json = null;
+                try
+                {
+                    json = JsonConvert.DeserializeObject<CentreInscription>(content);
+                }
+                catch (Exception e)
+                {
+                    DataPageHorseInfo = null;
+                    return null;
+                }
+
+                DataPageHorseInfo = json.Content;
+                return json;
+            }
+        }
+
+        /// <summary>
+        /// Записаться в КСК
+        /// </summary>
+        /// <returns></returns>
+        public async Task<RedirectInfo> DoCentreInscription()
+        {
+            if (DataPageHorseInfo == null)
+                return null;
+
+            var linkRend = Regex.Match(DataPageHorseInfo, @"\{\'params\'\: \'id=(.*?)\'\}").Groups[1].Value;
+            using (var response = await _request.PostAsync(PageDoCentreInscription, "id=" + linkRend))
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<RedirectInfo>(content);
             }
         }
     }

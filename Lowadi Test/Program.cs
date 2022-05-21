@@ -69,8 +69,8 @@ namespace Lowadi_Test
 
             var ksk = await lowApi.Horse.Ksk.CentreInscription(new Inscription() {
                 Fourrage = false,
-                Tarif=5,
-            }, 68512390);
+            }, 68589785);
+            var testx = await lowApi.Horse.Ksk.DoCentreInscription();
 
             Console.WriteLine("OK");
         }
