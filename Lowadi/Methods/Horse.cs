@@ -16,6 +16,7 @@ namespace Lowadi.Methods
     public partial class Horse : IHorse
     {
         public ISale Sale { get; set; }
+        public IKsk Ksk { get; set; }
         private Request _request;
         private string DataPageHorseInfo { get; set; }
 
@@ -36,11 +37,11 @@ namespace Lowadi.Methods
 
         private const string PageDoAge = PageMain + "/elevage/chevaux/doAge";
 
-
         public Horse(Request request)
         {
             this._request = request;
             this.Sale = new Sale(request);
+            this.Ksk = new Ksk(request);
         }
 
         /// <summary>

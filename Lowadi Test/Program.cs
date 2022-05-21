@@ -4,7 +4,9 @@ using System.Linq;
 using Lowadi;
 using Lowadi.Interface;
 using Lowadi.Interface.Methods;
+using Lowadi.Methods;
 using Lowadi.Models;
+using Lowadi.Models.Ksk;
 using Lowadi.Models.Type;
 
 namespace Lowadi_Test
@@ -19,6 +21,9 @@ namespace Lowadi_Test
 
         static async void Work()
         {
+            bool? test = false;
+            string ss = test.GetHashCode().ToString();
+
             var openData = File.ReadAllText("data.txt").Split(':');
 
             ILowadiApi lowApi = new LowadiApi();
@@ -29,13 +34,16 @@ namespace Lowadi_Test
                 return;
             }
 
-            //
-            // for (int i = 0; i < 5; i++)
+
+            // for (int i = 0; i < 30; i++)
             // {
             //     var data = await lowApi.Horse.Sale.GetHorses();
+            //     if(data.Count == 0)
+            //         break;
+            //
             //     foreach (var horse in data)
             //     {
-            //         var test = await lowApi.Horse.Sale.Buy(horse.LinkBuy);
+            //         var test = await lowApi.Horse.Sale.DoAcheter(horse.LinkBuy);
             //         if (test.Error.Errors != null)
             //             break;
             //         LowadiApi.Equus -= horse.Price;
@@ -43,11 +51,11 @@ namespace Lowadi_Test
             //     }
             // }
 
-            var factories = await lowApi.Horse.GetFactory();
-            var page = await lowApi.Horse.GetHorse(factories.ToList()[0].Id);
+            // var factories = await lowApi.Horse.GetFactory();
+            // var page = await lowApi.Horse.GetHorse(factories.ToList()[0].Id);
 
             // var horse = page.Horses.First(x=>x.Id == 52763688);
-            await lowApi.Horse.GetHorseInfo(68512390);
+            // await lowApi.Horse.GetHorseInfo(68512390);
             // var doSuckle = await lowApi.Horse.DoSuckle();
             // doSuckle = await lowApi.Horse.DoCentreMission(56381122);
             // doSuckle = await lowApi.Horse.DoEat();
@@ -57,7 +65,13 @@ namespace Lowadi_Test
             // doSuckle = await lowApi.Horse.DoEatTreat();
             // doSuckle = await lowApi.Horse.DoNight();
             // doSuckle = await lowApi.Horse.DoAge();
-            var trainig = await lowApi.Horse.DoTraining(TrainingType.Endurance, value: 2);
+            // var trainig = await lowApi.Horse.DoTraining(TrainingType.Endurance, value: 2);
+
+            var ksk = await lowApi.Horse.Ksk.CentreInscription(new Inscription() {
+                Fourrage = false,
+                Tarif=5,
+            }, 68512390);
+
             Console.WriteLine("OK");
         }
     }

@@ -51,6 +51,7 @@
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
       <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
@@ -78,10 +79,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attribute\StringValueAttribute.cs" />
     <Compile Include="Interface\ILowadiApi.cs" />
     <Compile Include="Interface\Methods\IAuth.cs" />
     <Compile Include="Interface\Methods\IHorse.cs" />
+    <Compile Include="Interface\Methods\IKsk.cs" />
     <Compile Include="Interface\Methods\ISale.cs" />
+    <Compile Include="Methods\Ksk.cs" />
     <Compile Include="Methods\Sale.cs" />
     <Compile Include="Models\Base.cs" />
     <Compile Include="Models\Horse\ActionInfo.cs" />
@@ -94,6 +98,7 @@
     <Compile Include="Models\Horse\RedirectInfo.cs" />
     <Compile Include="Models\Horse\Training.cs" />
     <Compile Include="Models\Horse\Walk.cs" />
+    <Compile Include="Models\Ksk\Inscription.cs" />
     <Compile Include="Others\Addition.cs" />
     <Compile Include="Others\JsonConvert.cs" />
     <Compile Include="Others\Request.cs" />
@@ -106,6 +111,15 @@
     <Compile Include="Models\Auth\ErrorModels.cs" />
     <Compile Include="Models\Horse\Corrals.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Type\Ksk\BandesType.cs" />
+    <Compile Include="Type\Ksk\BonnetsType.cs" />
+    <Compile Include="Type\Ksk\BotType.cs" />
+    <Compile Include="Type\Ksk\BridesType.cs" />
+    <Compile Include="Type\Ksk\LitterType.cs" />
+    <Compile Include="Type\Ksk\SellesType.cs" />
+    <Compile Include="Type\Ksk\SendType.cs" />
+    <Compile Include="Type\Ksk\TapisType.cs" />
+    <Compile Include="Type\Ksk\TriType.cs" />
     <Compile Include="Type\Sex.cs" />
     <Compile Include="Type\TraininType.cs" />
     <Compile Include="Type\TypeSale.cs" />

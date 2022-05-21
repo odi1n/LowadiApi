@@ -26,6 +26,12 @@ namespace Lowadi.Methods
             this._request = request;
         }
 
+        /// <summary>
+        /// Получить лошадей продажи
+        /// </summary>
+        /// <param name="typeSale">Тип покупки</param>
+        /// <param name="page">Номер страницы с лошадьми</param>
+        /// <returns></returns>
         public async Task<ICollection<Corrals>> GetHorses(TypeSale typeSale = TypeSale.Reserved, int page = 0)
         {
             string prive = "";
@@ -56,6 +62,9 @@ namespace Lowadi.Methods
 
             foreach (var element in doc.Body.QuerySelectorAll("#vente-chevaux>table>tbody>tr"))
             {
+                if (element.QuerySelector("td:nth-child(5)>table>tbody>tr:nth-child(1)>td>img") == null)
+                    break;
+
                 var sex = element.QuerySelector("td:nth-child(5)>table>tbody>tr:nth-child(1)>td>img")
                     .GetAttribute("alt");
                 var name = element.QuerySelector("td:nth-child(5)>table>tbody>tr:nth-child(2)>td>a").Text();
@@ -81,7 +90,12 @@ namespace Lowadi.Methods
             return corralsList;
         }
 
-        public async Task<BuyHorse> Buy(string linkBuy)
+        /// <summary>
+        /// Купить лошадб
+        /// </summary>
+        /// <param name="linkBuy">Ссылка на покупку</param>
+        /// <returns></returns>
+        public async Task<BuyHorse> DoAcheter(string linkBuy)
         {
             using (var response = await _request.PostAsync(_pageBuy, linkBuy))
             {

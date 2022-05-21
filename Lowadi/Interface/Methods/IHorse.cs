@@ -9,6 +9,7 @@ namespace Lowadi.Interface.Methods
     public interface IHorse
     {
         ISale Sale { get; set; }
+        IKsk Ksk { get; set; }
 
         Task<ICollection<Factory>> GetFactory();
 
