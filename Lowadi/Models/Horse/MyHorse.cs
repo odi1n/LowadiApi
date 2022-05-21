@@ -10,5 +10,6 @@ namespace Lowadi.Models
         /// Страницы
         /// </summary>
         public Page Page { get; set; }
+        public int Count { get; set; }
     }
 }

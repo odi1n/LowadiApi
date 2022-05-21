@@ -12,7 +12,7 @@ namespace Lowadi.Interface.Methods
 
         Task<ICollection<Factory>> GetFactory();
 
-        Task<MyHorse> GetAllHorse(int idFactory);
+        Task<MyHorse> GetHorse(int idFactory, bool all = false);
         Task GetHorseInfo(int idHorse);
 
         Task<RedirectInfo> DoAge(string page = null);

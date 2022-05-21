@@ -43,8 +43,8 @@ namespace Lowadi_Test
             //     }
             // }
 
-            // var factories = await lowApi.Horse.GetFactory();
-            // var page = await lowApi.Horse.GetAllHorse(factories.Last().Id);
+            var factories = await lowApi.Horse.GetFactory();
+            var page = await lowApi.Horse.GetHorse(factories.ToList()[0].Id);
 
             // var horse = page.Horses.First(x=>x.Id == 52763688);
             await lowApi.Horse.GetHorseInfo(42707347);
@@ -57,7 +57,7 @@ namespace Lowadi_Test
             // doSuckle = await lowApi.Horse.DoEatTreat();
             // doSuckle = await lowApi.Horse.DoNight();
             // doSuckle = await lowApi.Horse.DoAge();
-            var trainig = await lowApi.Horse.DoTraining(TrainingType.Endurance, value:2);
+            var trainig = await lowApi.Horse.DoTraining(TrainingType.Endurance, value: 2);
             Console.WriteLine("OK");
         }
     }

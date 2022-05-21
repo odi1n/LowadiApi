@@ -74,13 +74,15 @@ namespace Lowadi.Methods
         /// Получить всех лошадей
         /// </summary>
         /// <param name="idFactory">Номер завода</param>
+        /// <param name="all">Всех ли лошадей получить</param>
         /// <returns></returns>
-        public async Task<MyHorse> GetAllHorse(int idFactory)
+        public async Task<MyHorse> GetHorse(int idFactory, bool all = false)
         {
             MyHorse myHorse = new MyHorse() { Horses = new List<Horses>() };
             int pageNumber = 1;
+            int i = 0;
 
-            for (int i = 0; i < pageNumber + 1; i++)
+            do
             {
                 Dictionary<string, string> param = new Dictionary<string, string>() {
                     ["go"] = "1",
@@ -90,6 +92,7 @@ namespace Lowadi.Methods
                     ["chevalEspece"] = "any-all",
                     ["unicorn"] = "2",
                     ["pegasus"] = "2",
+                    ["search"] = "1",
                 };
 
                 using (var response = await _request.PostAsync(PageGetHorses, param))
@@ -99,6 +102,10 @@ namespace Lowadi.Methods
 
                     string min = "0";
                     string max = "0";
+
+                    string count = Regex.Match(content, "> \\((.*?)\\)<").Groups[1].Value;
+                    myHorse.Count = int.Parse(count);
+
                     if (doc.QuerySelector(".pageNumbering>ul>li.page") != null)
                     {
                         min = doc.QuerySelectorAll(".pageNumbering>ul>li.page>a").First().GetAttribute("data-page");
@@ -107,7 +114,8 @@ namespace Lowadi.Methods
 
                     if (myHorse.Page == null)
                     {
-                        pageNumber = int.Parse(max);
+                        if (all)
+                            pageNumber = int.Parse(max);
                         myHorse.Page = new Page() { Min = int.Parse(min), Max = int.Parse(max) };
                     }
 
@@ -126,7 +134,9 @@ namespace Lowadi.Methods
                         });
                     }
                 }
-            }
+
+                i++;
+            } while (i < pageNumber);
 
             return myHorse;
         }
@@ -323,7 +333,7 @@ namespace Lowadi.Methods
         }
 
         /// <summary>
-        /// Уход - Отправить спать
+        /// Ночь - Отправить спать
         /// </summary>
         /// <returns></returns>
         public async Task<ActionInfo> DoNight(string page = null)
@@ -340,7 +350,7 @@ namespace Lowadi.Methods
         }
 
         /// <summary>
-        /// Уход - Вырастить
+        /// Ночь - Вырастить
         /// </summary>
         /// <returns></returns>
         public async Task<RedirectInfo> DoAge(string page = null)
@@ -371,10 +381,8 @@ namespace Lowadi.Methods
             }
         }
 
-
-
         /// <summary>
-        /// Выполнить прогулки
+        /// Прогулки
         /// </summary>
         /// <param name="walkType">Тип прогулки</param>
         /// <param name="value">На сколько сделать прогулку</param>
@@ -384,7 +392,9 @@ namespace Lowadi.Methods
         {
             Walk walk = new List<Walk>() {
                 new Walk() { WalkType = WalkType.Foret, Key = "formbaladeForet", Id = "walkforetSlider-sliderHidden" },
-                new Walk() { WalkType = WalkType.Montagne, Key = "formbaladeMontagne", Id = "walkmontagneSlider-sliderHidden" }
+                new Walk() {
+                    WalkType = WalkType.Montagne, Key = "formbaladeMontagne", Id = "walkmontagneSlider-sliderHidden"
+                }
             }.First(x => x.WalkType == walkType);
 
             Dictionary<string, string> param = ParsInput(page ?? DataPageHorseInfo, walk.Key);
@@ -408,19 +418,40 @@ namespace Lowadi.Methods
         public async Task<ActionInfo> DoTraining(TrainingType trainingType, int value = 1, string page = null)
         {
             Training training = new List<Training>() {
-                new Training() { TrainingType = TrainingType.Dressage, Key = "entrainementDressage", Id = "trainingDressageSlider-sliderHidden" },
-                new Training() { TrainingType = TrainingType.Endurance, Key = "entrainementEndurance", Id = "trainingEnduranceSlider-sliderHidden" },
-                new Training() { TrainingType = TrainingType.Galop, Key = "entrainementGalop", Id = "trainingGalopSlider-sliderHidden" },
-                new Training() { TrainingType = TrainingType.Saut, Key = "entrainementSaut", Id = "trainingSautSlider-sliderHidden" },
-                new Training() { TrainingType = TrainingType.Trot, Key = "entrainementTrot", Id = "trainingTrotSlider-sliderHidden" },
-                new Training() { TrainingType = TrainingType.Vitesse, Key = "entrainementVitesse", Id = "trainingVitesseSlider-sliderHidden" },
-            }.First(x=>x.TrainingType == trainingType);
+                new Training() {
+                    TrainingType = TrainingType.Dressage,
+                    Key = "entrainementDressage",
+                    Id = "trainingDressageSlider-sliderHidden"
+                },
+                new Training() {
+                    TrainingType = TrainingType.Endurance,
+                    Key = "entrainementEndurance",
+                    Id = "trainingEnduranceSlider-sliderHidden"
+                },
+                new Training() {
+                    TrainingType = TrainingType.Galop,
+                    Key = "entrainementGalop",
+                    Id = "trainingGalopSlider-sliderHidden"
+                },
+                new Training() {
+                    TrainingType = TrainingType.Saut, Key = "entrainementSaut", Id = "trainingSautSlider-sliderHidden"
+                },
+                new Training() {
+                    TrainingType = TrainingType.Trot, Key = "entrainementTrot", Id = "trainingTrotSlider-sliderHidden"
+                },
+                new Training() {
+                    TrainingType = TrainingType.Vitesse,
+                    Key = "entrainementVitesse",
+                    Id = "trainingVitesseSlider-sliderHidden"
+                },
+            }.First(x => x.TrainingType == trainingType);
 
             Dictionary<string, string> param = ParsInput(page ?? DataPageHorseInfo, training.Key);
             if (param.Count == 0)
                 return null;
 
-            Dictionary<string, string> parsInput = ParsInput(page ?? DataPageHorseInfo, training.Id, training.Key.ToLower(), value);
+            Dictionary<string, string> parsInput =
+                ParsInput(page ?? DataPageHorseInfo, training.Id, training.Key.ToLower(), value);
             param.Add(parsInput.First().Key, parsInput.First().Value);
 
             using (HttpResponseMessage response = await _request.PostAsync(PageDoTraining, param))
