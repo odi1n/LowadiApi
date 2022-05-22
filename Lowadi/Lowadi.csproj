@@ -85,7 +85,7 @@
     <Compile Include="Methods\Shop.cs" />
     <Compile Include="Models\Base.cs" />
     <Compile Include="Models\Horse\ActionInfo.cs" />
-    <Compile Include="Models\Horse\Buy.cs" />
+    <Compile Include="Models\Horse\BuyInfo.cs" />
     <Compile Include="Models\Horse\BuyHorse.cs" />
     <Compile Include="Models\Horse\Factory.cs" />
     <Compile Include="Models\Horse\Horses.cs" />
@@ -98,8 +98,10 @@
     <Compile Include="Models\Ksk\Inscription.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\ReqData.cs" />
+    <Compile Include="Models\Shop\Buy.cs" />
     <Compile Include="Models\Shop\ItemsInfo.cs" />
     <Compile Include="Models\Shop\PurchaseInfo.cs" />
+    <Compile Include="Models\Shop\Sell.cs" />
     <Compile Include="Models\Shop\ShopData.cs" />
     <Compile Include="Others\Addition.cs" />
     <Compile Include="Others\JsonConvert.cs" />

@@ -9,8 +9,6 @@ namespace Lowadi.Models.Shop
 
         [JsonProperty("messageText")] public string MessageText { get; set; }
 
-        [JsonProperty("message")] public List<string> Message { get; set; }
-
         [JsonProperty("retour")] public string Retour { get; set; }
 
         [JsonProperty("id")] public long Id { get; set; }

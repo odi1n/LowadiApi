@@ -69,11 +69,17 @@ if (info.Errors.Count > 0)
 ```
 ### Покупка
 ```C#
-
+var buy = await lowApi.Shop.Buy(new ShopData() { 
+    Id = ItemsType.Apple, 
+    Nombre = 15, 
+}); # Купить 15 яблок
 ```
 ### Продажа
 ```C#
-
+var sell = await lowApi.Shop.Sale(new ShopData() { 
+    Id = ItemsType.Apple, 
+    Nombre = 15, 
+}); # Продать 15 яблок
 ```
 ### Получить мои продукты
 ```C#

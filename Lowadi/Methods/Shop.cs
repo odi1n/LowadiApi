@@ -31,12 +31,12 @@ namespace Lowadi.Methods
         /// </summary>
         /// <param name="ShopData">Данные</param>
         /// <returns></returns>
-        public async Task<PurchaseInfo> Buy(ShopData ShopData)
+        public async Task<Buy> Buy(ShopData ShopData)
         {
             using (var response = await _request.PostAsync(Achat, ShopData.GetParam()))
             {
                 string content = await response.Content.ReadAsStringAsync();
-                return JsonConvert.Deserialize<PurchaseInfo>(content);
+                return JsonConvert.Deserialize<Buy>(content);
             }
         }
 
@@ -45,12 +45,12 @@ namespace Lowadi.Methods
         /// </summary>
         /// <param name="ShopData">Данные</param>
         /// <returns></returns>
-        public async Task<PurchaseInfo> Sale(ShopData ShopData)
+        public async Task<Sell> Sale(ShopData ShopData)
         {
             using (var response = await _request.PostAsync(Vente, ShopData.GetParam()))
             {
                 string content = await response.Content.ReadAsStringAsync();
-                return JsonConvert.Deserialize<PurchaseInfo>(content);
+                return JsonConvert.Deserialize<Sell>(content);
             }
         }
 

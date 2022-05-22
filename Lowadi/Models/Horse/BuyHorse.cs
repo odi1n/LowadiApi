@@ -2,7 +2,7 @@
 {
     public class BuyHorse
     {
-        public Buy Buy { get; set; }
+        public BuyInfo Buy { get; set; }
         public ErrorModels Error { get; set; }
     }
 }

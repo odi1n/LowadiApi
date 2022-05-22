@@ -8,6 +8,7 @@ using Lowadi.Interface.Methods;
 using Lowadi.Methods;
 using Lowadi.Models;
 using Lowadi.Models.Ksk;
+using Lowadi.Models.Shop;
 using Lowadi.Models.Type;
 using Lowadi.Models.Type.Shops;
 
@@ -33,14 +34,17 @@ namespace Lowadi_Test
                 return;
             }
 
-            var data = await lowApi.Shop.GetInformation(new List<ItemsType>() {
-                ItemsType.CompoundFeed,
-                ItemsType.Apple,
-                ItemsType.SeedsPass,
-                ItemsType.Carrot,
-                ItemsType.Fertilizer_1,
-                ItemsType.Fertilizer_2
-            });
+            // var data = await lowApi.Shop.GetInformation(new List<ItemsType>() {
+            //     ItemsType.CompoundFeed,
+            //     ItemsType.Apple,
+            //     ItemsType.SeedsPass,
+            //     ItemsType.Carrot,
+            //     ItemsType.Fertilizer_1,
+            //     ItemsType.Fertilizer_2
+            // });
+
+            var buy = await lowApi.Shop.Buy(new ShopData() { Id = ItemsType.Apple, Nombre = 15, });
+            var sell = await lowApi.Shop.Sale(new ShopData() { Id = ItemsType.Apple, Nombre = 15, });
 
 
             // for (int i = 0; i < 30; i++)

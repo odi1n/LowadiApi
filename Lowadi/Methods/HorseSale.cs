@@ -103,7 +103,7 @@ namespace Lowadi.Methods
                 string content = await response.Content.ReadAsStringAsync();
                 return new BuyHorse()
                 {
-                    Buy = JsonConvert.Deserialize<Buy>(content),
+                    Buy = JsonConvert.Deserialize<BuyInfo>(content),
                     Error = JsonConvert.Deserialize<ErrorModels>(content),
                 };
             }

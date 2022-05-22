@@ -8,8 +8,8 @@ namespace Lowadi.Interface.Methods
 {
     public interface IShop
     {
-        Task<PurchaseInfo> Buy(ShopData ShopData);
-        Task<PurchaseInfo> Sale(ShopData ShopData);
+        Task<Buy> Buy(ShopData ShopData);
+        Task<Sell> Sale(ShopData ShopData);
         Task<IList<ItemsInfo>> GetInformation(List<ItemsType> items);
     }
 }
