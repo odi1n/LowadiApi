@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Lowadi;
@@ -8,6 +9,7 @@ using Lowadi.Methods;
 using Lowadi.Models;
 using Lowadi.Models.Ksk;
 using Lowadi.Models.Type;
+using Lowadi.Models.Type.Shops;
 
 namespace Lowadi_Test
 {
@@ -21,9 +23,6 @@ namespace Lowadi_Test
 
         static async void Work()
         {
-            bool? test = false;
-            string ss = test.GetHashCode().ToString();
-
             var openData = File.ReadAllText("data.txt").Split(':');
 
             ILowadiApi lowApi = new LowadiApi();
@@ -33,6 +32,15 @@ namespace Lowadi_Test
                 Console.WriteLine("не удалось авторизоваться");
                 return;
             }
+
+            var data = await lowApi.Shop.GetInformation(new List<ItemsType>() {
+                ItemsType.CompoundFeed,
+                ItemsType.Apple,
+                ItemsType.SeedsPass,
+                ItemsType.Carrot,
+                ItemsType.Fertilizer_1,
+                ItemsType.Fertilizer_2
+            });
 
 
             // for (int i = 0; i < 30; i++)
@@ -67,10 +75,10 @@ namespace Lowadi_Test
             // doSuckle = await lowApi.Horse.DoAge();
             // var trainig = await lowApi.Horse.DoTraining(TrainingType.Endurance, value: 2);
 
-            var ksk = await lowApi.Horse.Ksk.CentreInscription(new Inscription() {
-                Fourrage = false,
-            }, 68589785);
-            var testx = await lowApi.Horse.Ksk.DoCentreInscription();
+            // var ksk = await lowApi.Horse.Ksk.CentreInscription(new Inscription() {
+            // Fourrage = false,
+            // }, 68589785);
+            // var testx = await lowApi.Horse.Ksk.DoCentreInscription();
 
             Console.WriteLine("OK");
         }

@@ -28,12 +28,17 @@ namespace Lowadi
         /// <summary>
         /// Лошади
         /// </summary>
-        public Horse Horse { get; set; }
+        public IHorse Horse { get; set; }
 
         /// <summary>
         /// Продажа лошадей
         /// </summary>
-        public HorseSale HorseSale { get; set; }
+        public IHorseSale HorseSale { get; set; }
+
+        /// <summary>
+        /// Магазин
+        /// </summary>
+        public IShop Shop { get; set; }
 
         private Request _request { get; set; }
 
@@ -49,6 +54,7 @@ namespace Lowadi
 
             Horse = new Horse(_request);
             HorseSale = new HorseSale(_request);
+            Shop = new Shop(_request);
 
             return JsonConvert.Deserialize<ErrorModels>(authData);
         }

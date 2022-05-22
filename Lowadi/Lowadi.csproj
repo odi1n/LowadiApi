@@ -88,6 +88,7 @@
     <Compile Include="Interface\Methods\IShop.cs" />
     <Compile Include="Methods\Ksk.cs" />
     <Compile Include="Methods\HorseSale.cs" />
+    <Compile Include="Methods\Shop.cs" />
     <Compile Include="Models\Base.cs" />
     <Compile Include="Models\Horse\ActionInfo.cs" />
     <Compile Include="Models\Horse\Buy.cs" />
@@ -101,6 +102,8 @@
     <Compile Include="Models\Horse\Walk.cs" />
     <Compile Include="Models\Ksk\CentreInscription.cs" />
     <Compile Include="Models\Ksk\Inscription.cs" />
+    <Compile Include="Models\ReqData.cs" />
+    <Compile Include="Models\Shop\ShopData.cs" />
     <Compile Include="Others\Addition.cs" />
     <Compile Include="Others\JsonConvert.cs" />
     <Compile Include="Others\Request.cs" />
@@ -123,6 +126,7 @@
     <Compile Include="Type\Ksk\TapisType.cs" />
     <Compile Include="Type\Ksk\TriType.cs" />
     <Compile Include="Type\SexType.cs" />
+    <Compile Include="Type\Shops\ItemsType.cs" />
     <Compile Include="Type\TraininType.cs" />
     <Compile Include="Type\TypeSale.cs" />
     <Compile Include="Type\WalkType.cs" />
