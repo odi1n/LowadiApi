@@ -9,8 +9,8 @@ namespace Lowadi.Interface.Methods
 {
     public interface IShop
     {
-        Task<ShopInfo> Buy(ShopData ShopData);
-        Task<ShopInfo> Sale(ShopData ShopData);
-        Task<IList<ShopInformation>> GetInformation(List<ItemsType> items);
+        Task<PurchaseInfo> Buy(ShopData ShopData);
+        Task<PurchaseInfo> Sale(ShopData ShopData);
+        Task<IList<ItemsInfo>> GetInformation(List<ItemsType> items);
     }
 }

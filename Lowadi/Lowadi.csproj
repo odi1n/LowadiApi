@@ -103,6 +103,8 @@
     <Compile Include="Models\Ksk\CentreInscription.cs" />
     <Compile Include="Models\Ksk\Inscription.cs" />
     <Compile Include="Models\ReqData.cs" />
+    <Compile Include="Models\Shop\ItemsInfo.cs" />
+    <Compile Include="Models\Shop\PurchaseInfo.cs" />
     <Compile Include="Models\Shop\ShopData.cs" />
     <Compile Include="Others\Addition.cs" />
     <Compile Include="Others\JsonConvert.cs" />
