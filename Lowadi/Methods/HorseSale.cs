@@ -14,14 +14,14 @@ using JsonConvert = Lowadi.Others.JsonConvert;
 
 namespace Lowadi.Methods
 {
-    public class Sale : ISale
+    public class HorseSale : IHorseSale
     {
         private Request _request;
 
         private const string _pageLink = "https://www.lowadi.com/marche/vente/index";
         private const string _pageBuy = "https://www.lowadi.com/marche/vente/prive/doAcheter";
 
-        public Sale(Request request)
+        public HorseSale(Request request)
         {
             this._request = request;
         }

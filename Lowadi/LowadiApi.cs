@@ -25,7 +25,15 @@ namespace Lowadi
         /// </summary>
         public static int Pass { get; set; }
 
+        /// <summary>
+        /// Лошади
+        /// </summary>
         public Horse Horse { get; set; }
+
+        /// <summary>
+        /// Продажа лошадей
+        /// </summary>
+        public HorseSale HorseSale { get; set; }
 
         private Request _request { get; set; }
 
@@ -40,6 +48,7 @@ namespace Lowadi
             var authData = await auth.Oauth();
 
             Horse = new Horse(_request);
+            HorseSale = new HorseSale(_request);
 
             return JsonConvert.Deserialize<ErrorModels>(authData);
         }

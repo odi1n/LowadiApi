@@ -84,9 +84,10 @@
     <Compile Include="Interface\Methods\IAuth.cs" />
     <Compile Include="Interface\Methods\IHorse.cs" />
     <Compile Include="Interface\Methods\IKsk.cs" />
-    <Compile Include="Interface\Methods\ISale.cs" />
+    <Compile Include="Interface\Methods\IHorseSale.cs" />
+    <Compile Include="Interface\Methods\IShop.cs" />
     <Compile Include="Methods\Ksk.cs" />
-    <Compile Include="Methods\Sale.cs" />
+    <Compile Include="Methods\HorseSale.cs" />
     <Compile Include="Models\Base.cs" />
     <Compile Include="Models\Horse\ActionInfo.cs" />
     <Compile Include="Models\Horse\Buy.cs" />
