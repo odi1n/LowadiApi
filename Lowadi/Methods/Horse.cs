@@ -19,27 +19,27 @@ namespace Lowadi.Methods
         private Request _request;
         private string DataPageHorseInfo { get; set; }
 
-        private const string PageMain = "https://www.lowadi.com";
-        private const string PageFactory = PageMain + "/elevage/chevaux/?elevage=all-horses";
-        private const string PageGetHorses = PageMain + "/elevage/chevaux/searchHorse";
-        private const string PageHorseInfo = PageMain + "/elevage/chevaux/cheval?id=";
-        private const string PageDoSuckle = PageMain + "/elevage/chevaux/doSuckle";
-        private const string PageDoDrink = PageMain + "/elevage/chevaux/doDrink";
-        private const string PageDoStroke = PageMain + "/elevage/chevaux/doStroke";
-        private const string PageDoGroom = PageMain + "/elevage/chevaux/doGroom";
-        private const string PageDoEatTreat = PageMain + "/elevage/chevaux/doEatTreat";
-        private const string PageDoPlay = PageMain + "/elevage/chevaux/doPlay";
-        private const string PageDoEat = PageMain + "/elevage/chevaux/doEat";
-        private const string PageDoNight = PageMain + "/elevage/chevaux/doNight";
-        private const string PageDoCentreMission = PageMain + "/elevage/chevaux/doCentreMission";
-        private const string PageDoTraining = PageMain + "/elevage/chevaux/doTraining";
+        private static string PageMain { get; set; }
+        private readonly string _pageFactory = PageMain + "/elevage/chevaux/?elevage=all-horses";
+        private readonly string _pageGetHorses = PageMain + "/elevage/chevaux/searchHorse";
+        private readonly string _pageHorseInfo = PageMain + "/elevage/chevaux/cheval?id=";
+        private readonly string _pageDoSuckle = PageMain + "/elevage/chevaux/doSuckle";
+        private readonly string _pageDoDrink = PageMain + "/elevage/chevaux/doDrink";
+        private readonly string _pageDoStroke = PageMain + "/elevage/chevaux/doStroke";
+        private readonly string _pageDoGroom = PageMain + "/elevage/chevaux/doGroom";
+        private readonly string _pageDoEatTreat = PageMain + "/elevage/chevaux/doEatTreat";
+        private readonly string _pageDoPlay = PageMain + "/elevage/chevaux/doPlay";
+        private readonly string _pageDoEat = PageMain + "/elevage/chevaux/doEat";
+        private readonly string _pageDoNight = PageMain + "/elevage/chevaux/doNight";
+        private readonly string _pageDoCentreMission = PageMain + "/elevage/chevaux/doCentreMission";
+        private readonly string _pageDoTraining = PageMain + "/elevage/chevaux/doTraining";
+        private readonly string _pageDoAge = PageMain + "/elevage/chevaux/doAge";
 
-        private const string PageDoAge = PageMain + "/elevage/chevaux/doAge";
-
-        public Horse(Request request)
+        public Horse(Request request, Language language)
         {
+            PageMain = language.Link;
             this._request = request;
-            this.Ksk = new Ksk(request);
+            this.Ksk = new Ksk(request, language);
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Lowadi.Methods
         public async Task<ICollection<Factory>> GetFactory()
         {
             List<Factory> factories = new List<Factory>();
-            using (var response = await _request.GetAsync(PageFactory))
+            using (var response = await _request.GetAsync(_pageFactory))
             {
                 string content = await response.Content.ReadAsStringAsync();
                 var doc = new HtmlParser().ParseDocument(content);
@@ -94,7 +94,7 @@ namespace Lowadi.Methods
                     ["search"] = "1",
                 };
 
-                using (var response = await _request.PostAsync(PageGetHorses, param))
+                using (var response = await _request.PostAsync(_pageGetHorses, param))
                 {
                     string content = await response.Content.ReadAsStringAsync();
                     var doc = new HtmlParser().ParseDocument(content);
@@ -147,7 +147,7 @@ namespace Lowadi.Methods
         /// <returns></returns>
         public async Task GetHorseInfo(int idHorse)
         {
-            using (var response = await _request.GetAsync(PageHorseInfo + idHorse))
+            using (var response = await _request.GetAsync(_pageHorseInfo + idHorse))
                 DataPageHorseInfo = await response.Content.ReadAsStringAsync();
         }
 
@@ -208,7 +208,7 @@ namespace Lowadi.Methods
             if (param.Count == 0)
                 return null;
 
-            using (var response = await _request.PostAsync(PageDoSuckle, param))
+            using (var response = await _request.PostAsync(_pageDoSuckle, param))
             {
                 string content = await response.Content.ReadAsStringAsync();
                 return JsonConvert.Deserialize<ActionInfo>(content);
@@ -239,7 +239,7 @@ namespace Lowadi.Methods
             if (oats.Count > 0)
                 param.Add(oats.First().Key, oats.First().Value);
 
-            using (HttpResponseMessage response = await _request.PostAsync(PageDoEat, param))
+            using (HttpResponseMessage response = await _request.PostAsync(_pageDoEat, param))
             {
                 string content = await response.Content.ReadAsStringAsync();
                 return JsonConvert.Deserialize<ActionInfo>(content);
@@ -256,7 +256,7 @@ namespace Lowadi.Methods
             if (param.Count == 0)
                 return null;
 
-            using (var response = await _request.PostAsync(PageDoDrink, param))
+            using (var response = await _request.PostAsync(_pageDoDrink, param))
             {
                 string content = await response.Content.ReadAsStringAsync();
                 return JsonConvert.Deserialize<ActionInfo>(content);
@@ -273,7 +273,7 @@ namespace Lowadi.Methods
             if (param.Count == 0)
                 return null;
 
-            using (var response = await _request.PostAsync(PageDoStroke, param))
+            using (var response = await _request.PostAsync(_pageDoStroke, param))
             {
                 string content = await response.Content.ReadAsStringAsync();
                 return JsonConvert.Deserialize<ActionInfo>(content);
@@ -290,7 +290,7 @@ namespace Lowadi.Methods
             if (param.Count == 0)
                 return null;
 
-            using (var response = await _request.PostAsync(PageDoGroom, param))
+            using (var response = await _request.PostAsync(_pageDoGroom, param))
             {
                 string content = await response.Content.ReadAsStringAsync();
                 return JsonConvert.Deserialize<ActionInfo>(content);
@@ -307,7 +307,7 @@ namespace Lowadi.Methods
             if (param.Count == 0)
                 return null;
 
-            using (var response = await _request.PostAsync(PageDoEatTreat, param))
+            using (var response = await _request.PostAsync(_pageDoEatTreat, param))
             {
                 string content = await response.Content.ReadAsStringAsync();
                 return JsonConvert.Deserialize<ActionInfo>(content);
@@ -324,7 +324,7 @@ namespace Lowadi.Methods
             if (param.Count == 0)
                 return null;
 
-            using (var response = await _request.PostAsync(PageDoPlay, param))
+            using (var response = await _request.PostAsync(_pageDoPlay, param))
             {
                 string content = await response.Content.ReadAsStringAsync();
                 return JsonConvert.Deserialize<ActionInfo>(content);
@@ -341,7 +341,7 @@ namespace Lowadi.Methods
             if (param.Count == 0)
                 return null;
 
-            using (var response = await _request.PostAsync(PageDoNight, param))
+            using (var response = await _request.PostAsync(_pageDoNight, param))
             {
                 string content = await response.Content.ReadAsStringAsync();
                 return JsonConvert.Deserialize<ActionInfo>(content);
@@ -358,7 +358,7 @@ namespace Lowadi.Methods
             if (param.Count == 0)
                 return null;
 
-            using (var response = await _request.PostAsync(PageDoAge, param))
+            using (var response = await _request.PostAsync(_pageDoAge, param))
             {
                 string content = await response.Content.ReadAsStringAsync();
                 return JsonConvert.Deserialize<RedirectInfo>(content);
@@ -373,7 +373,7 @@ namespace Lowadi.Methods
         {
             Dictionary<string, string> param = new Dictionary<string, string>() { ["id"] = idHorse.ToString() };
 
-            using (var response = await _request.PostAsync(PageDoCentreMission, param))
+            using (var response = await _request.PostAsync(_pageDoCentreMission, param))
             {
                 string content = await response.Content.ReadAsStringAsync();
                 return JsonConvert.Deserialize<ActionInfo>(content);
@@ -401,7 +401,7 @@ namespace Lowadi.Methods
             Dictionary<string, string> parsInput = ParsInput(page ?? DataPageHorseInfo, walk.Slider, walk.Key, value);
             param.Add(parsInput.First().Key, parsInput.First().Value);
 
-            using (HttpResponseMessage response = await _request.PostAsync(PageDoCentreMission, param))
+            using (HttpResponseMessage response = await _request.PostAsync(_pageDoCentreMission, param))
             {
                 var content = await response.Content.ReadAsStringAsync();
                 return JsonConvert.Deserialize<ActionInfo>(content);
@@ -455,7 +455,7 @@ namespace Lowadi.Methods
                 ParsInput(page ?? DataPageHorseInfo, training.Slider, training.Key.ToLower(), value);
             param.Add(parsInput.First().Key, parsInput.First().Value);
 
-            using (HttpResponseMessage response = await _request.PostAsync(PageDoTraining, param))
+            using (HttpResponseMessage response = await _request.PostAsync(_pageDoTraining, param))
             {
                 var content = await response.Content.ReadAsStringAsync();
                 return JsonConvert.Deserialize<ActionInfo>(content);

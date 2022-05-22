@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AngleSharp.Dom;
 using AngleSharp.Html.Parser;
 using Lowadi.Interface.Methods;
+using Lowadi.Models;
 using Lowadi.Models.Shop;
 using Lowadi.Models.Type.Shops;
 using Lowadi.Others;
@@ -14,13 +15,14 @@ namespace Lowadi.Methods
     {
         private Request _request;
 
-        private const string PageMain = "https://www.lowadi.com";
-        private const string Achat = PageMain + "/marche/achat";
-        private const string Vente = PageMain + "/marche/vente";
-        private const string GetInfo = PageMain + "/marche/boutiqueVendre";
+        private static string PageMain { get; set; }
+        private readonly string _achat = PageMain + "/marche/achat";
+        private readonly string _vente = PageMain + "/marche/vente";
+        private readonly string _getInfo = PageMain + "/marche/boutiqueVendre";
 
-        public Shop(Request request)
+        public Shop(Request request, Language language)
         {
+            PageMain = language.Link;
             _request = request;
         }
 
@@ -31,7 +33,7 @@ namespace Lowadi.Methods
         /// <returns></returns>
         public async Task<PurchaseInfo> Buy(ShopData ShopData)
         {
-            using (var response = await _request.PostAsync(Achat, ShopData.GetParam()))
+            using (var response = await _request.PostAsync(_achat, ShopData.GetParam()))
             {
                 string content = await response.Content.ReadAsStringAsync();
                 return JsonConvert.Deserialize<PurchaseInfo>(content);
@@ -45,7 +47,7 @@ namespace Lowadi.Methods
         /// <returns></returns>
         public async Task<PurchaseInfo> Sale(ShopData ShopData)
         {
-            using (var response = await _request.PostAsync(Vente, ShopData.GetParam()))
+            using (var response = await _request.PostAsync(_vente, ShopData.GetParam()))
             {
                 string content = await response.Content.ReadAsStringAsync();
                 return JsonConvert.Deserialize<PurchaseInfo>(content);
@@ -61,7 +63,7 @@ namespace Lowadi.Methods
         {
             List<ItemsInfo> shopInformation = new List<ItemsInfo>();
 
-            using (var response = await _request.GetAsync(GetInfo))
+            using (var response = await _request.GetAsync(_getInfo))
             {
                 string content = await response.Content.ReadAsStringAsync();
 

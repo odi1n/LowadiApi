@@ -4,9 +4,6 @@ namespace Lowadi.Interface.Methods
 {
     public interface IAuth
     {
-        string UserName { get; set; }
-        string Password { get; set; }
-
-        Task<string> Oauth();
+        Task<string> Oauth(string userName, string password);
     }
 }

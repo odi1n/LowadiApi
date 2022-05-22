@@ -11,21 +11,18 @@ namespace Lowadi.Methods
 {
     public class Auth : IAuth
     {
-        public string UserName { get; set; }
-        public string Password { get; set; }
-
         public string UserAgent { get; set; } =
             "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36";
 
         private Request _request { get; set; }
 
-        private const string _pageLogin = "https://www.lowadi.com/site/logIn";
-        private const string _pageDoLogin = "https://www.lowadi.com/site/doLogIn";
+        private static string PageMain { get; set; }
+        private readonly string _pageLogin = PageMain + "/site/logIn";
+        private readonly string _pageDoLogin = PageMain + "/site/doLogIn";
 
-        public Auth(string userName, string password, Request request)
+        public Auth(Request request, Language language)
         {
-            this.UserName = userName;
-            this.Password = password;
+            PageMain = language.Link;
             this._request = request;
         }
 
@@ -57,7 +54,7 @@ namespace Lowadi.Methods
             return authParam;
         }
 
-        private async Task<HttpResponseMessage> DoLogIn(AuthModels param)
+        private async Task<HttpResponseMessage> DoLogIn(AuthModels param, string userName, string password)
         {
             _request.AddHeader("Host", "www.lowadi.com");
             _request.AddHeader("Accept", "text/html, */*; q=0.01");
@@ -68,23 +65,22 @@ namespace Lowadi.Methods
             _request.AddHeader("Sec-Fetch-Mode", "cors");
             _request.AddHeader("Sec-Fetch-Dest", "empty");
             _request.AddHeader("Referer", _pageLogin);
-            return await _request.PostAsync(_pageDoLogin, new Dictionary<string, string>()
-            {
+            return await _request.PostAsync(_pageDoLogin, new Dictionary<string, string>() {
                 [param.Name] = param.Value,
-                ["login"] = this.UserName,
-                ["password"] = this.Password,
+                ["login"] = userName,
+                ["password"] = password,
                 ["redirection"] = "https://www.lowadi.com/",
                 ["isBoxStyle"] = "",
             });
         }
 
-        public async Task<string> Oauth()
+        public async Task<string> Oauth(string userName, string password)
         {
             AuthModels authParams;
-            using (var login = await LogIn())
+            using (var logIn = await LogIn())
             {
-                string content = await login.RespToString();
-                if (login.StatusCode != System.Net.HttpStatusCode.OK) throw new Exception("Ошибка статуса loginIn");
+                string content = await logIn.RespToString();
+                if (logIn.StatusCode != System.Net.HttpStatusCode.OK) throw new Exception("Ошибка статуса loginIn");
                 if (string.IsNullOrWhiteSpace(content.ToString()))
                     throw new Exception("Ошибка получения данных loginIn");
 
@@ -92,7 +88,7 @@ namespace Lowadi.Methods
                 if (authParams == null) throw new Exception("Ошибка получения данных loginIn");
             }
 
-            using (var doLogin = await DoLogIn(authParams))
+            using (var doLogin = await DoLogIn(authParams, userName, password))
             {
                 if (doLogin.StatusCode != System.Net.HttpStatusCode.OK) throw new Exception("Ошибка статуса doLogin");
 
@@ -104,7 +100,5 @@ namespace Lowadi.Methods
                 return content;
             }
         }
-
-
     }
 }

@@ -10,6 +10,6 @@ namespace Lowadi.Interface
         IHorse Horse { get; set; }
         IHorseSale HorseSale { get; set; }
         IShop Shop { get; set; }
-        Task<ErrorModels> Login(string login, string password);
+        Task<ErrorModels> Login(string userName, string password);
     }
 }

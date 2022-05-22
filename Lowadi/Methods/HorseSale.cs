@@ -18,11 +18,13 @@ namespace Lowadi.Methods
     {
         private Request _request;
 
-        private const string _pageLink = "https://www.lowadi.com/marche/vente/index";
-        private const string _pageBuy = "https://www.lowadi.com/marche/vente/prive/doAcheter";
+        private static string PageMain { get; set; }
+        private readonly string _pageLink = PageMain + "/marche/vente/index";
+        private readonly string _pageBuy = PageMain + "/marche/vente/prive/doAcheter";
 
-        public HorseSale(Request request)
+        public HorseSale(Request request, Language language)
         {
+            PageMain = language.Link;
             this._request = request;
         }
 
@@ -39,12 +41,8 @@ namespace Lowadi.Methods
             if (typeSale == TypeSale.Straight) prive = "modificationDate";
             if (typeSale == TypeSale.Reserved) prive = "prive";
 
-            Dictionary<string, string> param = new Dictionary<string, string>()
-            {
-                ["type"] = prive,
-                ["tri"] = "modificationDate",
-                ["sens"] = "DESC",
-                ["page"] = page.ToString(),
+            Dictionary<string, string> param = new Dictionary<string, string>() {
+                ["type"] = prive, ["tri"] = "modificationDate", ["sens"] = "DESC", ["page"] = page.ToString(),
             };
 
             using (var response = await _request.GetAsync(_pageLink, param))
@@ -75,8 +73,7 @@ namespace Lowadi.Methods
                 string linkBuy = element.QuerySelector("td:nth-child(10)>div>div>script").Text();
                 linkBuy = Regex.Match(linkBuy, "'params': '(.*?)'}").Groups[1].ToString();
 
-                corralsList.Add(new Corrals()
-                {
+                corralsList.Add(new Corrals() {
                     SexType = sex == "male" ? SexType.Male : SexType.Male,
                     Name = name,
                     Skills = Int32.Parse(skills),
@@ -100,10 +97,8 @@ namespace Lowadi.Methods
             using (var response = await _request.PostAsync(_pageBuy, linkBuy))
             {
                 string content = await response.Content.ReadAsStringAsync();
-                return new BuyHorse()
-                {
-                    Buy = JsonConvert.Deserialize<Buy>(content),
-                    Error = JsonConvert.Deserialize<ErrorModels>(content),
+                return new BuyHorse() {
+                    Buy = JsonConvert.Deserialize<Buy>(content), Error = JsonConvert.Deserialize<ErrorModels>(content),
                 };
             }
         }

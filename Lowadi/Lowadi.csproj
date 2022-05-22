@@ -102,6 +102,7 @@
     <Compile Include="Models\Horse\Walk.cs" />
     <Compile Include="Models\Ksk\CentreInscription.cs" />
     <Compile Include="Models\Ksk\Inscription.cs" />
+    <Compile Include="Models\Language.cs" />
     <Compile Include="Models\ReqData.cs" />
     <Compile Include="Models\Shop\ItemsInfo.cs" />
     <Compile Include="Models\Shop\PurchaseInfo.cs" />

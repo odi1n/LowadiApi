@@ -17,13 +17,14 @@ namespace Lowadi.Methods
         private Request _request;
         private string DataPageHorseInfo { get; set; }
 
-        private const string PageMain = "https://www.lowadi.com";
-        private const string PageCentreSelection = PageMain + "/elevage/chevaux/centreSelection";
-        private const string PageDoCentreInscription = PageMain + "/elevage/chevaux/doCentreInscription";
+        private static string PageMain { get; set; }
+        private readonly string _pageCentreSelection = PageMain + "/elevage/chevaux/centreSelection";
+        private readonly string _pageDoCentreInscription = PageMain + "/elevage/chevaux/doCentreInscription";
 
 
-        public Ksk(Request request)
+        public Ksk(Request request, Language language)
         {
+            PageMain = language.Link;
             _request = request;
         }
 
@@ -43,7 +44,7 @@ namespace Lowadi.Methods
             if (!Validator.TryValidateObject(inscription, validation, results, true))
                 throw new ValidationException(results.First().ErrorMessage);
 
-            using (var response = await _request.PostAsync(PageCentreSelection, inscription.GetParam()))
+            using (var response = await _request.PostAsync(_pageCentreSelection, inscription.GetParam()))
             {
                 string content = await response.Content.ReadAsStringAsync();
                 CentreInscription json = null;
@@ -72,7 +73,7 @@ namespace Lowadi.Methods
                 return null;
 
             var linkRend = Regex.Match(DataPageHorseInfo, @"\{\'params\'\: \'id=(.*?)\'\}").Groups[1].Value;
-            using (var response = await _request.PostAsync(PageDoCentreInscription, "id=" + linkRend))
+            using (var response = await _request.PostAsync(_pageDoCentreInscription, "id=" + linkRend))
             {
                 string content = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<RedirectInfo>(content);
