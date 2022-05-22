@@ -77,7 +77,7 @@ namespace Lowadi.Methods
 
                 corralsList.Add(new Corrals()
                 {
-                    Sex = sex == "male" ? Sex.Male : Sex.Male,
+                    SexType = sex == "male" ? SexType.Male : SexType.Male,
                     Name = name,
                     Skills = Int32.Parse(skills),
                     Genetics = Int32.Parse(genetics),

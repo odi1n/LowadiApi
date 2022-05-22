@@ -11,7 +11,7 @@ namespace Lowadi.Models
     {
         public long Id { get; set; } = 0;
         public string Name { get; set; }
-        public Sex Sex { get; set; }
+        public SexType SexType { get; set; }
         public int Skills { get; set; }
         public int Genetics { get; set; }
         public DateTime Date { get; set; }

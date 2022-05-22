@@ -1,6 +1,6 @@
 ﻿namespace Lowadi.Models.Type
 {
-    public enum Sex
+    public enum SexType
     {
         Male,
         Female
