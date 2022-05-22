@@ -16,6 +16,11 @@ namespace Lowadi
     public class LowadiApi : ILowadiApi
     {
         /// <summary>
+        /// Имя пользователя
+        /// </summary>
+        public static string UserName { get; set; }
+
+        /// <summary>
         /// Экю
         /// </summary>
         public static int Equus { get; set; }
@@ -72,6 +77,8 @@ namespace Lowadi
         {
             IAuth auth = new Auth(_request, Language);
             var authData = await auth.Oauth(userName, password);
+
+            UserName = userName;
 
             Horse = new Horse(_request, Language);
             HorseSale = new HorseSale(_request, Language);
