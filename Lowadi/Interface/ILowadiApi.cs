@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Lowadi.Interface.Methods;
-using Lowadi.Methods;
 using Lowadi.Models;
 
 namespace Lowadi.Interface

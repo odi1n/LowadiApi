@@ -4,8 +4,8 @@ using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Lowadi.Interface.Methods;
-using Lowadi.Others;
 using Lowadi.Models;
+using Lowadi.Others;
 
 namespace Lowadi.Methods
 {
@@ -65,7 +65,8 @@ namespace Lowadi.Methods
             _request.AddHeader("Sec-Fetch-Mode", "cors");
             _request.AddHeader("Sec-Fetch-Dest", "empty");
             _request.AddHeader("Referer", PageLogin);
-            return await _request.PostAsync(PageDoLogin, new Dictionary<string, string>() {
+            return await _request.PostAsync(PageDoLogin, new Dictionary<string, string>()
+            {
                 [param.Name] = param.Value,
                 ["login"] = userName,
                 ["password"] = password,

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Lowadi.Models.Type.Shops
+﻿namespace Lowadi.Models.Type.Shops
 {
     public enum ItemsType
     {

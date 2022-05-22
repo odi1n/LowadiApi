@@ -83,7 +83,8 @@ namespace Lowadi.Methods
 
             do
             {
-                Dictionary<string, string> param = new Dictionary<string, string>() {
+                Dictionary<string, string> param = new Dictionary<string, string>()
+                {
                     ["go"] = "1",
                     ["startingPage"] = i.ToString(),
                     ["id"] = idFactory.ToString(),
@@ -128,8 +129,12 @@ namespace Lowadi.Methods
                             : element.QuerySelector("ul>li>a.affixe").Text();
                         var sleep = element.QuerySelector("div.cheval-status>span>img") != null;
 
-                        myHorse.Horses.Add(new Horses() {
-                            Id = int.Parse(id), Name = name, Factory = factory, IsSleep = sleep
+                        myHorse.Horses.Add(new Horses()
+                        {
+                            Id = int.Parse(id),
+                            Name = name,
+                            Factory = factory,
+                            IsSleep = sleep
                         });
                     }
                 }

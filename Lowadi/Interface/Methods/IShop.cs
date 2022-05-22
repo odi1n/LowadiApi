@@ -1,7 +1,6 @@
 ﻿
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Lowadi.Methods;
 using Lowadi.Models.Shop;
 using Lowadi.Models.Type.Shops;
 

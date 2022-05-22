@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Web;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web;
 using AngleSharp.Dom;
 using AngleSharp.Html.Parser;
 using Lowadi.Interface.Methods;
 using Lowadi.Models;
 using Lowadi.Models.Type;
 using Lowadi.Others;
-using Newtonsoft.Json;
 using JsonConvert = Lowadi.Others.JsonConvert;
 
 namespace Lowadi.Methods
@@ -41,8 +40,12 @@ namespace Lowadi.Methods
             if (typeSale == TypeSale.Straight) prive = "modificationDate";
             if (typeSale == TypeSale.Reserved) prive = "prive";
 
-            Dictionary<string, string> param = new Dictionary<string, string>() {
-                ["type"] = prive, ["tri"] = "modificationDate", ["sens"] = "DESC", ["page"] = page.ToString(),
+            Dictionary<string, string> param = new Dictionary<string, string>()
+            {
+                ["type"] = prive,
+                ["tri"] = "modificationDate",
+                ["sens"] = "DESC",
+                ["page"] = page.ToString(),
             };
 
             using (var response = await _request.GetAsync(PageLink, param))
@@ -73,7 +76,8 @@ namespace Lowadi.Methods
                 string linkBuy = element.QuerySelector("td:nth-child(10)>div>div>script").Text();
                 linkBuy = Regex.Match(linkBuy, "'params': '(.*?)'}").Groups[1].ToString();
 
-                corralsList.Add(new Corrals() {
+                corralsList.Add(new Corrals()
+                {
                     SexType = sex == "male" ? SexType.Male : SexType.Male,
                     Name = name,
                     Skills = Int32.Parse(skills),
@@ -97,8 +101,10 @@ namespace Lowadi.Methods
             using (var response = await _request.PostAsync(PageBuy, linkBuy))
             {
                 string content = await response.Content.ReadAsStringAsync();
-                return new BuyHorse() {
-                    Buy = JsonConvert.Deserialize<Buy>(content), Error = JsonConvert.Deserialize<ErrorModels>(content),
+                return new BuyHorse()
+                {
+                    Buy = JsonConvert.Deserialize<Buy>(content),
+                    Error = JsonConvert.Deserialize<ErrorModels>(content),
                 };
             }
         }

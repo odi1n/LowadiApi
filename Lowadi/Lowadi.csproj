@@ -35,12 +35,6 @@
       <HintPath>..\packages\AngleSharp.0.16.1\lib\net461\AngleSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Fizzler">
-      <HintPath>..\packages\Fizzler.Tools.1.1.0\tools\Fizzler.dll</HintPath>
-    </Reference>
-    <Reference Include="Fizzler.Systems.HtmlAgilityPack">
-      <HintPath>..\packages\Fizzler.Tools.1.1.0\tools\Fizzler.Systems.HtmlAgilityPack.dll</HintPath>
-    </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -139,9 +133,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interface\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
