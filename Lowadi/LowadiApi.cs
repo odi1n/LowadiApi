@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using AngleSharp.Dom;
 using AngleSharp.Html.Parser;
 using Lowadi.Interface;
 using Lowadi.Interface.Methods;
 using Lowadi.Models;
 using Lowadi.Methods;
+using Lowadi.Models.Type;
 using Lowadi.Others;
 
 namespace Lowadi

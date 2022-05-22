@@ -128,6 +128,7 @@
     <Compile Include="Type\Ksk\SendType.cs" />
     <Compile Include="Type\Ksk\TapisType.cs" />
     <Compile Include="Type\Ksk\TriType.cs" />
+    <Compile Include="Type\LanguageType.cs" />
     <Compile Include="Type\SexType.cs" />
     <Compile Include="Type\Shops\ItemsType.cs" />
     <Compile Include="Type\TraininType.cs" />

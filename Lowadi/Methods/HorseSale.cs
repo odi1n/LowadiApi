@@ -19,8 +19,8 @@ namespace Lowadi.Methods
         private Request _request;
 
         private static string PageMain { get; set; }
-        private readonly string _pageLink = PageMain + "/marche/vente/index";
-        private readonly string _pageBuy = PageMain + "/marche/vente/prive/doAcheter";
+        private static string PageLink => PageMain + "/marche/vente/index";
+        private static string PageBuy => PageMain + "/marche/vente/prive/doAcheter";
 
         public HorseSale(Request request, Language language)
         {
@@ -45,7 +45,7 @@ namespace Lowadi.Methods
                 ["type"] = prive, ["tri"] = "modificationDate", ["sens"] = "DESC", ["page"] = page.ToString(),
             };
 
-            using (var response = await _request.GetAsync(_pageLink, param))
+            using (var response = await _request.GetAsync(PageLink, param))
             {
                 string content = await response.Content.ReadAsStringAsync();
                 LowadiApi.GetBalance(content);
@@ -94,7 +94,7 @@ namespace Lowadi.Methods
         /// <returns></returns>
         public async Task<BuyHorse> DoAcheter(string linkBuy)
         {
-            using (var response = await _request.PostAsync(_pageBuy, linkBuy))
+            using (var response = await _request.PostAsync(PageBuy, linkBuy))
             {
                 string content = await response.Content.ReadAsStringAsync();
                 return new BuyHorse() {

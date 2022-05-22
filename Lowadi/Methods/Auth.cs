@@ -17,8 +17,8 @@ namespace Lowadi.Methods
         private Request _request { get; set; }
 
         private static string PageMain { get; set; }
-        private readonly string _pageLogin = PageMain + "/site/logIn";
-        private readonly string _pageDoLogin = PageMain + "/site/doLogIn";
+        private static string PageLogin => PageMain + "/site/logIn";
+        private static string PageDoLogin => PageMain + "/site/doLogIn";
 
         public Auth(Request request, Language language)
         {
@@ -38,7 +38,7 @@ namespace Lowadi.Methods
             _request.AddHeader("Sec-Fetch-Dest", "document");
             _request.AddHeader("Accept-Language", "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,af;q=0.6");
 
-            return await _request.GetAsync(_pageLogin);
+            return await _request.GetAsync(PageLogin);
         }
 
         private AuthModels ParsLogin(string response)
@@ -64,8 +64,8 @@ namespace Lowadi.Methods
             _request.AddHeader("Sec-Fetch-Site", "same-origin");
             _request.AddHeader("Sec-Fetch-Mode", "cors");
             _request.AddHeader("Sec-Fetch-Dest", "empty");
-            _request.AddHeader("Referer", _pageLogin);
-            return await _request.PostAsync(_pageDoLogin, new Dictionary<string, string>() {
+            _request.AddHeader("Referer", PageLogin);
+            return await _request.PostAsync(PageDoLogin, new Dictionary<string, string>() {
                 [param.Name] = param.Value,
                 ["login"] = userName,
                 ["password"] = password,

@@ -16,9 +16,9 @@ namespace Lowadi.Methods
         private Request _request;
 
         private static string PageMain { get; set; }
-        private readonly string _achat = PageMain + "/marche/achat";
-        private readonly string _vente = PageMain + "/marche/vente";
-        private readonly string _getInfo = PageMain + "/marche/boutiqueVendre";
+        private static string Achat => PageMain + "/marche/achat";
+        private static string Vente => PageMain + "/marche/vente";
+        private static string GetInfo => PageMain + "/marche/boutiqueVendre";
 
         public Shop(Request request, Language language)
         {
@@ -33,7 +33,7 @@ namespace Lowadi.Methods
         /// <returns></returns>
         public async Task<PurchaseInfo> Buy(ShopData ShopData)
         {
-            using (var response = await _request.PostAsync(_achat, ShopData.GetParam()))
+            using (var response = await _request.PostAsync(Achat, ShopData.GetParam()))
             {
                 string content = await response.Content.ReadAsStringAsync();
                 return JsonConvert.Deserialize<PurchaseInfo>(content);
@@ -47,7 +47,7 @@ namespace Lowadi.Methods
         /// <returns></returns>
         public async Task<PurchaseInfo> Sale(ShopData ShopData)
         {
-            using (var response = await _request.PostAsync(_vente, ShopData.GetParam()))
+            using (var response = await _request.PostAsync(Vente, ShopData.GetParam()))
             {
                 string content = await response.Content.ReadAsStringAsync();
                 return JsonConvert.Deserialize<PurchaseInfo>(content);
@@ -63,7 +63,7 @@ namespace Lowadi.Methods
         {
             List<ItemsInfo> shopInformation = new List<ItemsInfo>();
 
-            using (var response = await _request.GetAsync(_getInfo))
+            using (var response = await _request.GetAsync(GetInfo))
             {
                 string content = await response.Content.ReadAsStringAsync();
 
