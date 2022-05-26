@@ -5,111 +5,111 @@
         /// <summary>
         /// Овес
         /// </summary>
-        Oats = 109,
+        Oats,
 
         /// <summary>
         /// Фураж
         /// </summary>
-        Forage = 446,
+        Forage,
 
         /// <summary>
         /// Яблоко
         /// </summary>
-        Apple = 101,
+        Apple,
 
         /// <summary>
         /// Морковь
         /// </summary>
-        Carrot = 102,
+        Carrot,
 
         /// <summary>
         /// Комбикорм
         /// </summary>
-        CompoundFeed = 447,
+        CompoundFeed,
 
         /// <summary>
         /// Дерево
         /// </summary>
-        Wood = 453,
+        Wood,
 
         /// <summary>
         /// Iron
         /// </summary>
-        Iron = 454,
+        Iron,
 
         /// <summary>
         /// Песок
         /// </summary>
-        Sand = 455,
+        Sand,
 
         /// <summary>
         /// Кожа
         /// </summary>
-        Leather = 456,
+        Leather,
 
         /// <summary>
         /// Солома
         /// </summary>
-        Straw = 115,
+        Straw,
 
         /// <summary>
         /// Лен
         /// </summary>
-        Flax = 114,
+        Flax,
 
         /// <summary>
         /// Пшеница
         /// </summary>
-        Wheat = 169,
+        Wheat,
 
         /// <summary>
         /// Семена льна
         /// </summary>
-        SeedsFlax = 178,
+        SeedsFlax,
 
         /// <summary>
         /// Семена яблок
         /// </summary>
-        SeedsApple = 168,
+        SeedsApple,
 
         /// <summary>
         /// Семена люцерны
         /// </summary>
-        SeedsAlfalfa = 445,
+        SeedsAlfalfa,
 
         /// <summary>
         /// Семена овса
         /// </summary>
-        SeedsOat = 175,
+        SeedsOat,
 
         /// <summary>
         /// Семена пшеницы
         /// </summary>
-        SeedsWheat = 177,
+        SeedsWheat,
 
         /// <summary>
         /// Семена маркови
         /// </summary>
-        SeedsCarrot = 176,
+        SeedsCarrot,
 
         /// <summary>
         /// Семена пропуска
         /// </summary>
-        SeedsPass = 157,
+        SeedsPass,
 
         /// <summary>
         /// Удобрение 1
         /// </summary>
-        Fertilizer_1 = 125,
+        Fertilizer_1,
 
         /// <summary>
         /// Удобрение 2
         /// </summary>
-        Fertilizer_2 = 126,
+        Fertilizer_2,
 
         /// <summary>
         /// Навоз
         /// </summary>
-        Manure = 127,
+        Manure,
     }
 }

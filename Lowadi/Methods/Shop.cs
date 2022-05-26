@@ -20,9 +20,9 @@ namespace Lowadi.Methods
         private static string Vente => PageMain + "/marche/vente";
         private static string GetInfo => PageMain + "/marche/boutiqueVendre";
 
-        public Shop(Request request, Language language)
+        public Shop(Request request, Server server)
         {
-            PageMain = language.Link;
+            PageMain = server.Link;
             _request = request;
         }
 

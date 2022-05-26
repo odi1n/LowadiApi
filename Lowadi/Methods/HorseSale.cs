@@ -21,9 +21,9 @@ namespace Lowadi.Methods
         private static string PageLink => PageMain + "/marche/vente/index";
         private static string PageBuy => PageMain + "/marche/vente/prive/doAcheter";
 
-        public HorseSale(Request request, Language language)
+        public HorseSale(Request request, Server server)
         {
-            PageMain = language.Link;
+            PageMain = server.Link;
             this._request = request;
         }
 

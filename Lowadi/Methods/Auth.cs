@@ -20,9 +20,9 @@ namespace Lowadi.Methods
         private static string PageLogin => PageMain + "/site/logIn";
         private static string PageDoLogin => PageMain + "/site/doLogIn";
 
-        public Auth(Request request, Language language)
+        public Auth(Request request, Server server)
         {
-            PageMain = language.Link;
+            PageMain = server.Link;
             this._request = request;
         }
 

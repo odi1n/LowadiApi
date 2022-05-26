@@ -96,8 +96,9 @@
     <Compile Include="Models\Horse\Walk.cs" />
     <Compile Include="Models\Ksk\CentreInscription.cs" />
     <Compile Include="Models\Ksk\Inscription.cs" />
-    <Compile Include="Models\Language.cs" />
+    <Compile Include="Models\Server.cs" />
     <Compile Include="Models\ReqData.cs" />
+    <Compile Include="Models\ServerData.cs" />
     <Compile Include="Models\Shop\Buy.cs" />
     <Compile Include="Models\Shop\ItemsInfo.cs" />
     <Compile Include="Models\Shop\PurchaseInfo.cs" />
@@ -124,7 +125,7 @@
     <Compile Include="Type\Ksk\SendType.cs" />
     <Compile Include="Type\Ksk\TapisType.cs" />
     <Compile Include="Type\Ksk\TriType.cs" />
-    <Compile Include="Type\LanguageType.cs" />
+    <Compile Include="Type\ServerType.cs" />
     <Compile Include="Type\SexType.cs" />
     <Compile Include="Type\Shops\ItemsType.cs" />
     <Compile Include="Type\TraininType.cs" />

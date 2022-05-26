@@ -46,41 +46,41 @@ namespace Lowadi
         /// <summary>
         /// Язык
         /// </summary>
-        public Language Language { get; private set; }
+        public Server Server { get; private set; }
 
         private Request _request { get; set; }
 
-        private List<Language> Languages { get; set; } = new List<Language>() {
-            new Language() { LanguageType = LanguageType.EN, Link = "https://www.howrse.com" },
-            new Language() { LanguageType = LanguageType.US, Link = "https://us.howrse.com" },
-            new Language() { LanguageType = LanguageType.UK, Link = "https://www.howrse.co.uk" },
-            new Language() { LanguageType = LanguageType.AU, Link = "https://au.howrse.com" },
-            new Language() { LanguageType = LanguageType.CA, Link = "https://ca.howrse.com" },
-            new Language() { LanguageType = LanguageType.DE, Link = "https://www.howrse.de" },
-            new Language() { LanguageType = LanguageType.FR, Link = "https://www.equideow.com" },
-            new Language() { LanguageType = LanguageType.ES, Link = "https://www.caballow.com" },
-            new Language() { LanguageType = LanguageType.PT, Link = "https://www.howrse.com.pt" },
-            new Language() { LanguageType = LanguageType.BR, Link = "https://br.howrse.com" },
-            new Language() { LanguageType = LanguageType.IL, Link = "https://www.howrse.co.il" },
-            new Language() { LanguageType = LanguageType.RU, Link = "https://www.lowadi.com" },
+        private List<Server> Servers { get; set; } = new List<Server>() {
+            new Server() { ServerType = ServerType.EN, Link = "https://www.howrse.com" },
+            new Server() { ServerType = ServerType.US, Link = "https://us.howrse.com" },
+            new Server() { ServerType = ServerType.UK, Link = "https://www.howrse.co.uk" },
+            new Server() { ServerType = ServerType.AU, Link = "https://au.howrse.com" },
+            new Server() { ServerType = ServerType.CA, Link = "https://ca.howrse.com" },
+            new Server() { ServerType = ServerType.DE, Link = "https://www.howrse.de" },
+            new Server() { ServerType = ServerType.FR, Link = "https://www.equideow.com" },
+            new Server() { ServerType = ServerType.ES, Link = "https://www.caballow.com" },
+            new Server() { ServerType = ServerType.PT, Link = "https://www.howrse.com.pt" },
+            new Server() { ServerType = ServerType.BR, Link = "https://br.howrse.com" },
+            new Server() { ServerType = ServerType.IL, Link = "https://www.howrse.co.il" },
+            new Server() { ServerType = ServerType.RU, Link = "https://www.lowadi.com" },
         };
 
-        public LowadiApi(LanguageType languageType = LanguageType.RU)
+        public LowadiApi(ServerType serverType = ServerType.RU)
         {
-            this.Language = Languages.First(x => x.LanguageType == languageType);
+            this.Server = Servers.First(x => x.ServerType == serverType);
             _request = new Request();
         }
 
         public async Task<ErrorModels> Login(string userName, string password)
         {
-            IAuth auth = new Auth(_request, Language);
+            IAuth auth = new Auth(_request, Server);
             var authData = await auth.Oauth(userName, password);
 
             UserName = userName;
 
-            Horse = new Horse(_request, Language);
-            HorseSale = new HorseSale(_request, Language);
-            Shop = new Shop(_request, Language);
+            Horse = new Horse(_request, Server);
+            HorseSale = new HorseSale(_request, Server);
+            Shop = new Shop(_request, Server);
 
             return JsonConvert.Deserialize<ErrorModels>(authData);
         }
