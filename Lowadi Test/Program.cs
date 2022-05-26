@@ -27,8 +27,8 @@ namespace Lowadi_Test
             var openData = File.ReadAllText("data.txt").Split(':');
 
             ILowadiApi lowApi = new LowadiApi();
-            var info = await lowApi.Login(openData[0], openData[1]);
-            if (info.Errors.Count > 0)
+            var isLogin = await lowApi.Login(openData[0], openData[1]);
+            if (isLogin.Errors.Count > 0)
             {
                 Console.WriteLine("не удалось авторизоваться");
                 return;
@@ -43,9 +43,9 @@ namespace Lowadi_Test
             //     ItemsType.Fertilizer_2
             // });
 
-            var buy = await lowApi.Shop.Buy(new ShopData() { Id = ItemsType.Apple, Nombre = 15, });
-            var sell = await lowApi.Shop.Sale(new ShopData() { Id = ItemsType.Apple, Nombre = 15, });
-
+            // var buy = await lowApi.Shop.Buy(new ShopData() { Id = ItemsType.Apple, Nombre = 1, });
+            // var sell = await lowApi.Shop.Sale(new ShopData() { Id = ItemsType.Apple, Nombre = 15, });
+            var infomation = await lowApi.Shop.GetInformation(new List<ItemsType>() { ItemsType.Apple, ItemsType.Carrot });
 
             // for (int i = 0; i < 30; i++)
             // {

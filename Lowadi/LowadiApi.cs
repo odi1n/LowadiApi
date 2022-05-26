@@ -11,7 +11,7 @@ using Lowadi.Others;
 
 namespace Lowadi
 {
-    public class LowadiApi : ILowadiApi
+    public class LowadiApi : ServerData, ILowadiApi
     {
         /// <summary>
         /// Имя пользователя
@@ -46,28 +46,13 @@ namespace Lowadi
         /// <summary>
         /// Язык
         /// </summary>
-        public Server Server { get; private set; }
+        public static Server Server { get; private set; }
 
         private Request _request { get; set; }
 
-        private List<Server> Servers { get; set; } = new List<Server>() {
-            new Server() { ServerType = ServerType.EN, Link = "https://www.howrse.com" },
-            new Server() { ServerType = ServerType.US, Link = "https://us.howrse.com" },
-            new Server() { ServerType = ServerType.UK, Link = "https://www.howrse.co.uk" },
-            new Server() { ServerType = ServerType.AU, Link = "https://au.howrse.com" },
-            new Server() { ServerType = ServerType.CA, Link = "https://ca.howrse.com" },
-            new Server() { ServerType = ServerType.DE, Link = "https://www.howrse.de" },
-            new Server() { ServerType = ServerType.FR, Link = "https://www.equideow.com" },
-            new Server() { ServerType = ServerType.ES, Link = "https://www.caballow.com" },
-            new Server() { ServerType = ServerType.PT, Link = "https://www.howrse.com.pt" },
-            new Server() { ServerType = ServerType.BR, Link = "https://br.howrse.com" },
-            new Server() { ServerType = ServerType.IL, Link = "https://www.howrse.co.il" },
-            new Server() { ServerType = ServerType.RU, Link = "https://www.lowadi.com" },
-        };
-
         public LowadiApi(ServerType serverType = ServerType.RU)
         {
-            this.Server = Servers.First(x => x.ServerType == serverType);
+            Server = Servers.First(x => x.ServerType == serverType);
             _request = new Request();
         }
 
@@ -78,8 +63,8 @@ namespace Lowadi
 
             UserName = userName;
 
-            Horse = new Horse(_request, Server);
-            HorseSale = new HorseSale(_request, Server);
+            Horse = new Horse(_request, Server.Link);
+            HorseSale = new HorseSale(_request, Server.Link);
             Shop = new Shop(_request, Server);
 
             return JsonConvert.Deserialize<ErrorModels>(authData);

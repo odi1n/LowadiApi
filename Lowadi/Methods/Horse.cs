@@ -35,11 +35,11 @@ namespace Lowadi.Methods
         private static string PageDoTraining => PageMain + "/elevage/chevaux/doTraining";
         private static string PageDoAge => PageMain + "/elevage/chevaux/doAge";
 
-        public Horse(Request request, Server server)
+        public Horse(Request request, string serverLink)
         {
-            PageMain = server.Link;
+            PageMain = serverLink;
             this._request = request;
-            this.Ksk = new Ksk(request, server);
+            this.Ksk = new Ksk(request, serverLink);
         }
 
         /// <summary>

@@ -10,7 +10,7 @@ namespace Lowadi.Models
     {
         public ServerType ServerType { get; set; }
         public string Link { get; set; }
-        public ICollection<Items> ItemsCollection;
+        public ICollection<Items> ItemsCollection { get; set; }
     }
 
     public class Items

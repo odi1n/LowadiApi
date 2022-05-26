@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Lowadi.Models.Type;
 using Lowadi.Models.Type.Shops;
 
@@ -6,19 +7,18 @@ namespace Lowadi.Models
 {
     public class ServerData
     {
-        public ICollection<Server> Servers = new List<Server>() {
-            new Server() { ServerType = ServerType.EN, Link = "https://www.howrse.com" },
-            new Server() { ServerType = ServerType.US, Link = "https://us.howrse.com" },
-            new Server() { ServerType = ServerType.UK, Link = "https://www.howrse.co.uk" },
-            new Server() { ServerType = ServerType.AU, Link = "https://au.howrse.com" },
-            new Server() { ServerType = ServerType.CA, Link = "https://ca.howrse.com" },
-            new Server() { ServerType = ServerType.DE, Link = "https://www.howrse.de" },
-            new Server() { ServerType = ServerType.FR, Link = "https://www.equideow.com" },
-            new Server() { ServerType = ServerType.ES, Link = "https://www.caballow.com" },
-            new Server() { ServerType = ServerType.PT, Link = "https://www.howrse.com.pt" },
-            new Server() { ServerType = ServerType.BR, Link = "https://br.howrse.com" },
-            new Server() { ServerType = ServerType.IL, Link = "https://www.howrse.co.il" },
-            new Server() { ServerType = ServerType.RU, Link = "https://www.lowadi.com" },
+        internal static ICollection<Server> Servers = new List<Server>() {
+            // new Server() { ServerType = ServerType.EN, Link = "https://www.howrse.com" },
+            // new Server() { ServerType = ServerType.US, Link = "https://us.howrse.com" },
+            // new Server() { ServerType = ServerType.UK, Link = "https://www.howrse.co.uk" },
+            // new Server() { ServerType = ServerType.AU, Link = "https://au.howrse.com" },
+            // new Server() { ServerType = ServerType.CA, Link = "https://ca.howrse.com" },
+            // new Server() { ServerType = ServerType.DE, Link = "https://www.howrse.de" },
+            // new Server() { ServerType = ServerType.FR, Link = "https://www.equideow.com" },
+            // new Server() { ServerType = ServerType.ES, Link = "https://www.caballow.com" },
+            // new Server() { ServerType = ServerType.PT, Link = "https://www.howrse.com.pt" },
+            // new Server() { ServerType = ServerType.BR, Link = "https://br.howrse.com" },
+            // new Server() { ServerType = ServerType.IL, Link = "https://www.howrse.co.il" },
             new Server() {
                 ServerType = ServerType.RU,
                 Link = "https://www.lowadi.com",
@@ -48,5 +48,18 @@ namespace Lowadi.Models
                 }
             }
         };
+
+        internal static string GetItemId(object convertedValue)
+        {
+            return Servers.First(x => x.ServerType == LowadiApi.Server.ServerType)
+                .ItemsCollection.First(x => x.ItemsType == (ItemsType)convertedValue).Id.ToString();
+        }
+
+        internal static List<ItemsType> GetItemType(List<ItemsType> itemsTypes)
+        {
+            return ServerData.Servers.First(x => x.ServerType == LowadiApi.Server.ServerType)
+                .ItemsCollection.Where(x => itemsTypes.Contains(x.ItemsType))
+                .Select(x => x.ItemsType).ToList();
+        }
     }
 }

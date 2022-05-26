@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Lowadi.Attribute;
+using Lowadi.Models.Type;
+using Lowadi.Models.Type.Shops;
 
 namespace Lowadi.Models
 {
@@ -37,10 +39,16 @@ namespace Lowadi.Models
             else if (prop.PropertyType.IsEnum)
             {
                 var convertedValue = Enum.Parse(prop.PropertyType, getValue.ToString(), false);
-                var description = GetDescription((Enum)convertedValue);
-                if (description == "0")
-                    return null;
-                value = description;
+
+                if (Enum.IsDefined(typeof(ItemsType), convertedValue))
+                    value = ServerData.GetItemId(convertedValue);
+                else
+                {
+                    var description = GetDescription((Enum)convertedValue);
+                    if (description == "0")
+                        return null;
+                    value = description;
+                }
             }
 
             return value;

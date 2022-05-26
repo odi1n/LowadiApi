@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AngleSharp.Dom;
 using AngleSharp.Html.Parser;
@@ -20,9 +21,12 @@ namespace Lowadi.Methods
         private static string Vente => PageMain + "/marche/vente";
         private static string GetInfo => PageMain + "/marche/boutiqueVendre";
 
+        private Server _server { get; set; }
+
         public Shop(Request request, Server server)
         {
             PageMain = server.Link;
+            _server = server;
             _request = request;
         }
 
@@ -68,7 +72,7 @@ namespace Lowadi.Methods
                 string content = await response.Content.ReadAsStringAsync();
 
                 var doc = new HtmlParser().ParseDocument(content);
-                foreach (ItemsType item in items)
+                foreach (ItemsType item in ServerData.GetItemType(items))
                 {
                     var count = "0";
                     if (doc.QuerySelector($"span[id^=\"inventaire{item.GetHashCode()}\"]") != null)

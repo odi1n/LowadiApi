@@ -22,9 +22,9 @@ namespace Lowadi.Methods
         private static string PageDoCentreInscription => PageMain + "/elevage/chevaux/doCentreInscription";
 
 
-        public Ksk(Request request, Server server)
+        public Ksk(Request request, string serverLink)
         {
-            PageMain = server.Link;
+            PageMain = serverLink;
             _request = request;
         }
 
