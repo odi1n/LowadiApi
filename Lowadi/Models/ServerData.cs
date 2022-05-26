@@ -52,12 +52,13 @@ namespace Lowadi.Models
         internal static string GetItemId(object convertedValue)
         {
             return Servers.First(x => x.ServerType == LowadiApi.Server.ServerType)
-                .ItemsCollection.First(x => x.ItemsType == (ItemsType)convertedValue).Id.ToString();
+                .ItemsCollection.First(x => x.ItemsType == (ItemsType)convertedValue)
+                .Id.ToString();
         }
 
         internal static List<ItemsType> GetItemType(List<ItemsType> itemsTypes)
         {
-            return ServerData.Servers.First(x => x.ServerType == LowadiApi.Server.ServerType)
+            return Servers.First(x => x.ServerType == LowadiApi.Server.ServerType)
                 .ItemsCollection.Where(x => itemsTypes.Contains(x.ItemsType))
                 .Select(x => x.ItemsType).ToList();
         }
