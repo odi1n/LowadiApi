@@ -49,11 +49,10 @@ namespace Lowadi.Models
             }
         };
 
-        internal static string GetItemId(object convertedValue)
+        internal static int GetItemId(ItemsType itemsType)
         {
             return Servers.First(x => x.ServerType == LowadiApi.Server.ServerType)
-                .ItemsCollection.First(x => x.ItemsType == (ItemsType)convertedValue)
-                .Id.ToString();
+                .ItemsCollection.First(x => x.ItemsType == itemsType).Id;
         }
 
         internal static List<ItemsType> GetItemType(List<ItemsType> itemsTypes)

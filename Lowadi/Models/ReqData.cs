@@ -41,7 +41,7 @@ namespace Lowadi.Models
                 var convertedValue = Enum.Parse(prop.PropertyType, getValue.ToString(), false);
 
                 if (Enum.IsDefined(typeof(ItemsType), convertedValue))
-                    value = ServerData.GetItemId(convertedValue);
+                    value = ServerData.GetItemId((ItemsType)convertedValue).ToString();
                 else
                 {
                     var description = GetDescription((Enum)convertedValue);
