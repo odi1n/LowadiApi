@@ -1,4 +1,4 @@
-# Lowadi Bot
+# Lowadi Api
 
 ![GitHub release (latest by date)](https://img.shields.io/badge/C%23%20-%20.Net%20Framework%204.6.1-blueviolet)
 
