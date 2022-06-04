@@ -55,11 +55,10 @@ namespace Lowadi.Models
                 .ItemsCollection.First(x => x.ItemsType == itemsType).Id;
         }
 
-        internal static List<ItemsType> GetItemType(List<ItemsType> itemsTypes)
+        internal static List<Items> GetItemType(List<ItemsType> itemsTypes)
         {
             return Servers.First(x => x.ServerType == LowadiApi.Server.ServerType)
-                .ItemsCollection.Where(x => itemsTypes.Contains(x.ItemsType))
-                .Select(x => x.ItemsType).ToList();
+                .ItemsCollection.Where(x => itemsTypes.Contains(x.ItemsType)).ToList();
         }
     }
 }

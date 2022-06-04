@@ -72,12 +72,12 @@ namespace Lowadi.Methods
                 string content = await response.Content.ReadAsStringAsync();
 
                 var doc = new HtmlParser().ParseDocument(content);
-                foreach (ItemsType item in ServerData.GetItemType(items))
+                foreach (Items item in ServerData.GetItemType(items))
                 {
                     var count = "0";
-                    if (doc.QuerySelector($"span[id^=\"inventaire{item.GetHashCode()}\"]") != null)
-                        count = doc.QuerySelector($"span[id^=\"inventaire{item.GetHashCode()}\"]").Text();
-                    shopInformation.Add(new ItemsInfo() { ItemsType = item, Count = int.Parse(count) });
+                    if (doc.QuerySelector($"span[id^=\"inventaire{item.Id}\"]") != null)
+                        count = doc.QuerySelector($"span[id^=\"inventaire{item.Id}\"]").Text();
+                    shopInformation.Add(new ItemsInfo() { ItemsType = item.ItemsType, Count = int.Parse(count) });
                 }
 
                 return shopInformation;
