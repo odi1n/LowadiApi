@@ -10,6 +10,6 @@ namespace Lowadi.Interface.Methods
     {
         Task<Buy> Buy(ShopData ShopData);
         Task<Sell> Sale(ShopData ShopData);
-        Task<IList<ItemsInfo>> GetInformation(List<ItemsType> items);
+        Task<IEnumerable<ItemsInfo>> GetInformation(List<ItemsType> items);
     }
 }

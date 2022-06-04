@@ -45,17 +45,31 @@ namespace Lowadi_Test
 
             // var buy = await lowApi.Shop.Buy(new ShopData() { Id = ItemsType.Apple, Nombre = 1, });
             // var sell = await lowApi.Shop.Sale(new ShopData() { Id = ItemsType.Apple, Nombre = 15, });
-            var infomation = await lowApi.Shop.GetInformation(new List<ItemsType>() {
-                ItemsType.Iron,
+            var info = await lowApi.Shop.GetInformation(new List<ItemsType>() {
                 ItemsType.Apple,
                 ItemsType.Carrot,
                 ItemsType.Fertilizer_1,
                 ItemsType.Fertilizer_2,
-                ItemsType.Oats,
                 ItemsType.Flax,
                 ItemsType.Forage,
-                ItemsType.Leather
+                ItemsType.Iron,
+                ItemsType.Leather,
+                ItemsType.Manure,
+                ItemsType.Oats,
+                ItemsType.Sand,
+                ItemsType.Straw,
+                ItemsType.Wheat,
+                ItemsType.Wood,
+                ItemsType.CompoundFeed,
+                ItemsType.SeedsAlfalfa,
+                ItemsType.SeedsApple,
+                ItemsType.SeedsCarrot,
+                ItemsType.SeedsFlax,
+                ItemsType.SeedsOat,
+                ItemsType.SeedsPass,
+                ItemsType.SeedsWheat
             });
+            var ss = info.ToList();
 
 
             var buy_info = await lowApi.Shop.Buy(new ShopData() { Id = ItemsType.Iron, Nombre = 1 });

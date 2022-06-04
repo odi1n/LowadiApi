@@ -63,7 +63,7 @@ namespace Lowadi.Methods
         /// </summary>
         /// <param name="items">Продукты о которых нужно получить информацию</param>
         /// <returns></returns>
-        public async Task<IList<ItemsInfo>> GetInformation(List<ItemsType> items)
+        public async Task<IEnumerable<ItemsInfo>> GetInformation(List<ItemsType> items)
         {
             List<ItemsInfo> shopInformation = new List<ItemsInfo>();
 
@@ -80,6 +80,7 @@ namespace Lowadi.Methods
                     shopInformation.Add(new ItemsInfo() { ItemsType = item.ItemsType, Count = int.Parse(count) });
                 }
 
+                LowadiApi.GetBalance(content);
                 return shopInformation;
             }
         }
